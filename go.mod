@@ -3,7 +3,7 @@ module github.com/nuhmanudheent/hosp-connect-user-service
 go 1.22.2
 
 require (
-	github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924005555-c64b90e281f0
+	github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924021516-543a414b4843
 	github.com/joho/godotenv v1.5.1
 	golang.org/x/crypto v0.27.0
 	golang.org/x/oauth2 v0.23.0
@@ -26,7 +26,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.4 // indirect
 	github.com/googleapis/gax-go/v2 v2.13.0 // indirect
-		github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/pgx/v5 v5.7.1 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect

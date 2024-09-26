@@ -3,7 +3,6 @@ package handler
 import (
 	"context"
 	"log"
-	"strconv"
 
 	pb "github.com/NUHMANUDHEENT/hosp-connect-pb/proto/patient"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/domain"
@@ -44,7 +43,6 @@ func (p *PatientServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest
 	}, nil
 }
 
-// Patient SignUp Handler
 func (p *PatientServiceClient) SignUp(ctx context.Context, req *pb.SignUpRequest) (*pb.StandardResponse, error) {
 	patientDetails := domain.Patient{
 		Email:    req.GetEmail(),
@@ -73,7 +71,7 @@ func (p *PatientServiceClient) SignUp(ctx context.Context, req *pb.SignUpRequest
 	}, nil
 }
 func (p *PatientServiceClient) GetProfile(ctx context.Context, req *pb.GetProfileRequest) (*pb.GetProfileResponse, error) {
-	patient, err := p.service.GetProfile(req.PatientId)
+	patient, err := p.service.GetProfile(req.Email)
 	if err != nil {
 		return &pb.GetProfileResponse{
 			Status:     "fail",
@@ -94,9 +92,8 @@ func (p *PatientServiceClient) GetProfile(ctx context.Context, req *pb.GetProfil
 }
 
 func (p *PatientServiceClient) UpdateProfile(ctx context.Context, req *pb.UpdateProfileRequest) (*pb.StandardResponse, error) {
-	patientId := strconv.Itoa(int(req.Patient.PatientId))
 	err := p.service.UpdateProfile(domain.Patient{
-		PatientID: patientId,
+		PatientID: req.Patient.PatientId,
 		Name:      req.Patient.Name,
 		Email:     req.Patient.Email,
 		Phone:     int(req.Patient.Phone),

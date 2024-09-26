@@ -34,6 +34,16 @@ github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924005555-c64b90e281f0 h1:F
 github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924005555-c64b90e281f0/go.mod h1:rKO4S3mPaJ1GfIP9rHaHzMRj7SHaUzuQ1BJKTSiMU2c=
 github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924010338-05d013fe9e74 h1:6uaXw4R1RR1pUnX9r/2IyjxNfA8mA4ss1Io1j9bOo+4=
 github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924010338-05d013fe9e74/go.mod h1:rKO4S3mPaJ1GfIP9rHaHzMRj7SHaUzuQ1BJKTSiMU2c=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924013537-22c408b77b3d h1:wEKmVvuNfuyBvJZqX6Al+pjLH5tVYykGw2kmCyvYzq8=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924013537-22c408b77b3d/go.mod h1:rKO4S3mPaJ1GfIP9rHaHzMRj7SHaUzuQ1BJKTSiMU2c=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924013735-eb796e4cd5f2 h1:p0/9QBzo0tJIetdB9bRk7xL0ySfp6/VUJNhEaLSvlu8=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924013735-eb796e4cd5f2/go.mod h1:rKO4S3mPaJ1GfIP9rHaHzMRj7SHaUzuQ1BJKTSiMU2c=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924020051-adc1b7c84386 h1:og4G6IwmdbuCH1ZKaCxcsugwnCkZhUEFTlRQBlklH6E=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924020051-adc1b7c84386/go.mod h1:rKO4S3mPaJ1GfIP9rHaHzMRj7SHaUzuQ1BJKTSiMU2c=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924020950-4188902b140b h1:RgD5c1NSeuI4+lHBK3uaXm13JGWoeo1IZJlzoOZhJoc=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924020950-4188902b140b/go.mod h1:rKO4S3mPaJ1GfIP9rHaHzMRj7SHaUzuQ1BJKTSiMU2c=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924021516-543a414b4843 h1:VuFSGG3/KTYgMrcCRRIVYPA0zCSfMU+6XvOTLE+p6DA=
+github.com/NUHMANUDHEENT/hosp-connect-pb v0.0.0-20240924021516-543a414b4843/go.mod h1:rKO4S3mPaJ1GfIP9rHaHzMRj7SHaUzuQ1BJKTSiMU2c=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=

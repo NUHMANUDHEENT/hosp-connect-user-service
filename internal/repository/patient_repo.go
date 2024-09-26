@@ -11,10 +11,9 @@ import (
 type PatientRepository interface {
 	SignIn(patient domain.Patient) (string, error)
 	SignUp(patient domain.Patient) (string, error)
-	// New methods for patient management
 	DeletePatient(patientID string) (string, error)
 	Block(patientID string, reason string) (string, error)
-	GetProfile(patientId int32) (domain.Patient, error)
+	GetProfile(patientId string) (domain.Patient, error)
 	UpdateProfile(patient domain.Patient) error
 	ListPatients() ([]domain.Patient, error)
 }
@@ -26,7 +25,6 @@ func NewPatientRepository(db *gorm.DB) PatientRepository {
 	return &patientRepository{db: db}
 }
 
-// Patient SignIn Repository logic
 func (p *patientRepository) SignIn(patient domain.Patient) (string, error) {
 	var patientCheck domain.Patient
 	if err := p.db.First(&patientCheck, "email = ?", patient.Email).Error; err != nil {
@@ -45,13 +43,11 @@ func (p *patientRepository) SignIn(patient domain.Patient) (string, error) {
 
 // Patient SignUp Repository logic
 func (p *patientRepository) SignUp(patient domain.Patient) (string, error) {
-	// Check if email already exists
 	var existingPatient domain.Patient
 	if err := p.db.First(&existingPatient, "email = ?", patient.Email).Error; err == nil {
 		return "", errors.New("email already in use")
 	}
 
-	// Hash the password before saving
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(patient.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return "", err
@@ -85,15 +81,15 @@ func (p *patientRepository) Block(patientID string, reason string) (string, erro
 	}
 	patient.IsBlock = true
 	patient.IsBlockReason = reason
-	if err := p.db.Save(&patient).Error; err != nil {
-		return "Patient blocking failed", err
+	if err := p.db.Where("email = ?", patient.Email).Model(&patient).Updates(patient).Error; err != nil {
+		return "blocking failed", err
 	}
 	return "Patient blocked successfully", nil
 }
 
-func (p *patientRepository) GetProfile(patientId int32) (domain.Patient, error) {
+func (p *patientRepository) GetProfile(patientId string) (domain.Patient, error) {
 	var patient domain.Patient
-	if err := p.db.Where("parient_id = ?", patientId).First(&patient).Error; err != nil {
+	if err := p.db.Where("email = ?", patientId).First(&patient).Error; err != nil {
 		return patient, err
 	}
 	return patient, nil

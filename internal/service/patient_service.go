@@ -8,7 +8,7 @@ import (
 type PatientService interface {
 	SignIn(patient domain.Patient) (string, error)
 	SignUp(patient domain.Patient) (string, error)
-	GetProfile(patientId int32) (domain.Patient, error)
+	GetProfile(patientId string) (domain.Patient, error)
 	UpdateProfile(patient domain.Patient) error
 }
 
@@ -38,7 +38,7 @@ func (p *patientService) SignUp(patient domain.Patient) (string, error) {
 	return resp, nil
 }
 
-func (p *patientService) GetProfile(patientId int32) (domain.Patient, error) {
+func (p *patientService) GetProfile(patientId string) (domain.Patient, error) {
     return p.repo.GetProfile(patientId)
 }
 

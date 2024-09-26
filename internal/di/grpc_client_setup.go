@@ -12,6 +12,5 @@ func GRPCClientSetup(port string) *grpc.ClientConn {
 	if err != nil {
 		log.Fatalf("failed to connect to doctor service: %v", err)
 	}
-
 	return doconn
 }

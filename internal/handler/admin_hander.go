@@ -74,7 +74,6 @@ func (a *AdminServiceClient) DeleteDoctor(ctx context.Context, req *pb.DeleteDoc
 	}, nil
 }
 
-
 // Add Patient
 func (a *AdminServiceClient) AddPatient(ctx context.Context, req *pb.AddPatientRequest) (*pb.StandardResponse, error) {
 	patientDetails := domain.Patient{
@@ -131,6 +130,63 @@ func (a *AdminServiceClient) BlockPatient(ctx context.Context, req *pb.BlockPati
 	return &pb.StandardResponse{
 		Status:     "success",
 		Message:    resp,
+		StatusCode: 200,
+	}, nil
+}
+func (a *AdminServiceClient) ListDoctors(ctx context.Context, req *pb.Empty) (*pb.ListDoctorsResponse, error) {
+	doctors, err := a.service.ListDoctors()
+	if err != nil {
+		return &pb.ListDoctorsResponse{
+			Status:     "fail",
+			StatusCode: 500,
+			Error:      err.Error(),
+		}, nil
+	}
+
+	var pbDoctors []*pb.Doctor
+	for _, doctor := range doctors {
+		pbDoctors = append(pbDoctors, &pb.Doctor{
+			DoctorId:         doctor.DoctorId,
+			Name:             doctor.Name,
+			Email:            doctor.Email,
+			Phone:            int32(doctor.Phone),
+			SpecializationId: int32(doctor.SpecilazationId),
+		})
+	}
+
+	return &pb.ListDoctorsResponse{
+		Doctors:    pbDoctors,
+		Status:     "success",
+		StatusCode: 200,
+	}, nil
+}
+
+// ListPatients returns a list of all patients
+func (a *AdminServiceClient) ListPatients(ctx context.Context, req *pb.Empty) (*pb.ListPatientsResponse, error) {
+	patients, err := a.service.ListPatients()
+	if err != nil {
+		return &pb.ListPatientsResponse{
+			Status:     "fail",
+			StatusCode: 500,
+			Error:      err.Error(),
+		}, nil
+	}
+
+	var pbPatients []*pb.Patient
+	for _, patient := range patients {
+		pbPatients = append(pbPatients, &pb.Patient{
+			PatientId: patient.PatientID,
+			Name:      patient.Name,
+			Email:     patient.Email,
+			Phone:     int32(patient.Phone),
+			Age:       int32(patient.Age),
+			Gender:    patient.Gender,
+		})
+	}
+
+	return &pb.ListPatientsResponse{
+		Patients:   pbPatients,
+		Status:     "success",
 		StatusCode: 200,
 	}, nil
 }

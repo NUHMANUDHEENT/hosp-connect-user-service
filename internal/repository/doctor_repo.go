@@ -48,7 +48,7 @@ func (d *doctorRepository) SignUpStore(doctordetails domain.Doctor) (string, err
 	}
 	doctordetails.Password = string(password)
 	if err := d.db.Create(&doctordetails).Error; err != nil {
-		return "Failed to create doctor", err
+		return "Email already exist", err
 	}
 
 	return "Doctor Registed successfully", nil

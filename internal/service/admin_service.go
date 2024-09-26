@@ -13,6 +13,8 @@ type AdminService interface {
 	AddPatient(patient domain.Patient) (string, error)
 	DeletePatient(patientID string) (string, error)
 	BlockPatient(patientID string, reason string) (string, error)
+	ListDoctors() ([]domain.Doctor, error)
+    ListPatients() ([]domain.Patient, error)
 }
 type adminService struct {
 	repo       repository.AdminRepository
@@ -79,4 +81,11 @@ func (a *adminService) BlockPatient(patientID string, reason string) (string, er
 	}
 	return resp, nil
 }
+func (s *adminService) ListDoctors() ([]domain.Doctor, error) {
+    return s.doctorRepo.ListDoctors()
+}
 
+// ListPatients returns a list of all patients
+func (s *adminService) ListPatients() ([]domain.Patient, error) {
+    return s.patientRepo.ListPatients()
+}

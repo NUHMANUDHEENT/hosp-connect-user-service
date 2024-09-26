@@ -10,7 +10,7 @@ type Doctor struct {
 	gorm.Model
 	DoctorId        string
 	Name            string
-	Email           string `gorm:"uniqueIndex"`
+	Email           string `gorm:"unique"`
 	Password        string
 	Phone           int
 	SpecilazationId int

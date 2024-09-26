@@ -35,7 +35,6 @@ func (d *doctorService) GetProfile(email string) (domain.Doctor, error) {
 	return d.repo.GetProfile(email)
 }
 
-// UpdateProfile updates the doctor's profile
 func (d *doctorService) UpdateProfile(doctor domain.Doctor) error {
 	return d.repo.UpdateProfile(doctor)
 }
