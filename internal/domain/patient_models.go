@@ -11,6 +11,7 @@ type Patient struct {
 	Phone    int
 	Age      int32
 	Gender   string
+	VerifyStatus bool
 	IsBlock   bool
 	IsBlockReason string
 }

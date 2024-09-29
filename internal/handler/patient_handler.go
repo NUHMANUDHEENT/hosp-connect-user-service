@@ -21,7 +21,7 @@ func NewPatientHandler(service service.PatientService) *PatientServiceClient {
 }
 
 // Patient SignIn Handler
-func (p *PatientServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) (*pb.StandardResponse, error) {
+func (p *PatientServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) (*pb.SignInResponse, error) {
 	patientDetails := domain.Patient{
 		Email:    req.GetEmail(),
 		Password: req.GetPassword(),
@@ -30,15 +30,16 @@ func (p *PatientServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest
 
 	resp, err := p.service.SignIn(patientDetails)
 	if err != nil {
-		return &pb.StandardResponse{
+		return &pb.SignInResponse{
 			Status:     "fail",
-			Error:      "Invalid credentials, please try again.",
+			Message:    "Invalid credentials, please try again.",
 			StatusCode: 401,
 		}, nil
 	}
-	return &pb.StandardResponse{
+	return &pb.SignInResponse{
+		PatientId:  resp,
 		Status:     "success",
-		Message:    resp,
+		Message:    "Successfully logged in",
 		StatusCode: 200,
 	}, nil
 }
@@ -70,8 +71,23 @@ func (p *PatientServiceClient) SignUp(ctx context.Context, req *pb.SignUpRequest
 		StatusCode: 200,
 	}, nil
 }
+func (p *PatientServiceClient) SignUpVerify(ctx context.Context, req *pb.SignUpVerifyRequest) (*pb.StandardResponse, error) {
+	resp, err := p.service.SignUpVerify(req.Token)
+	if err != nil {
+		return &pb.StandardResponse{
+			Status:     "fail",
+			Error:      resp,
+			StatusCode: 400,
+		}, nil
+	}
+	return &pb.StandardResponse{
+		Status:     "success",
+		Message:    resp,
+		StatusCode: 200,
+	}, nil
+}
 func (p *PatientServiceClient) GetProfile(ctx context.Context, req *pb.GetProfileRequest) (*pb.GetProfileResponse, error) {
-	patient, err := p.service.GetProfile(req.Email)
+	patient, err := p.service.GetProfile(req.PatientId)
 	if err != nil {
 		return &pb.GetProfileResponse{
 			Status:     "fail",

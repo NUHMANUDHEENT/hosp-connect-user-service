@@ -23,7 +23,7 @@ func NewAdminRepository(db *gorm.DB) AdminRepository {
 func (a *adminRepository) SignIn(admin domain.Admin) (string, error) {
 	var adminCheck domain.Admin
 	if err := a.db.First(&adminCheck, "email = ?", admin.Email).Error; err != nil {
-		return "Email or password is incorrect", nil
+		return "Email or password is incorrect", err
 	}
 	if admin.Password != adminCheck.Password {
 		return "Email or password is incorrect", nil

@@ -20,7 +20,7 @@ func NewAdminHandler(service service.AdminService) *AdminServiceClient {
 	}
 }
 
-func (a *AdminServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) (*pb.StandardResponse, error) {
+func (a *AdminServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) (*pb.SignInResponse, error) {
 	admindetails := domain.Admin{
 		Email:    req.GetEmail(),
 		Password: req.GetPassword(),
@@ -28,14 +28,14 @@ func (a *AdminServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) 
 	log.Println("signin request", admindetails)
 	resp, err := a.service.SignIn(admindetails)
 	if err != nil {
-		return &pb.StandardResponse{
+		return &pb.SignInResponse{
 			Status:     "fail",
-			Error:      "Invalid credentials, please try again.",
+			Message:    "Invalid credentials, please try again.",
 			StatusCode: 401,
 		}, nil
 
 	}
-	return &pb.StandardResponse{
+	return &pb.SignInResponse{
 		Status:     "success",
 		Message:    resp,
 		StatusCode: 200,
@@ -60,6 +60,22 @@ func (a *AdminServiceClient) AddDoctor(ctx context.Context, req *pb.AddDoctorReq
 func (a *AdminServiceClient) DeleteDoctor(ctx context.Context, req *pb.DeleteDoctorRequest) (*pb.StandardResponse, error) {
 	log.Println("Deleting patient with ID: ", req.DoctorId)
 	resp, err := a.service.DeleteDoctor(req.GetDoctorId())
+	if err != nil {
+		return &pb.StandardResponse{
+			Status:     "fail",
+			Error:      err.Error(),
+			StatusCode: 400,
+		}, nil
+	}
+	return &pb.StandardResponse{
+		Status:     "success",
+		Message:    resp,
+		StatusCode: 200,
+	}, nil
+}
+func (a *AdminServiceClient) AddSpecialization(ctx context.Context, req *pb.AddSpecializationRequest) (*pb.StandardResponse, error) {
+	log.Println("Adding specialization with name: ", req.Name)
+	resp, err := a.service.AddSpecialization(req.Name, req.Description)
 	if err != nil {
 		return &pb.StandardResponse{
 			Status:     "fail",

@@ -27,14 +27,21 @@ type DoctorAvailability struct {
 }
 type DoctorSpecialization struct {
 	gorm.Model
-	DoctorId int
-	Name     string
+	Name     string `gorm:"unique"`
+	Description string
 }
 
 type DoctorTokens struct {
 	gorm.Model
-	DoctorId     string
+	DoctorId     string `gorm:"unique"`
 	AccessToken  string
 	RefreshToken string
 	ExpiresAt    time.Time
+}
+type AvailabilitySlot struct {
+	gorm.Model
+	DoctorID  string    `json:"doctor_id"`
+	EventType string    `json:"day_of_week"`
+	StartTime time.Time `json:"start_time"`
+	EndTime   time.Time `json:"end_time"`
 }

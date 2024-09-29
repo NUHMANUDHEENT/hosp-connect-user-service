@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	pb "github.com/NUHMANUDHEENT/hosp-connect-pb/proto/doctor"
@@ -22,12 +23,12 @@ func NewDoctorHandler(service service.DoctorService) *DoctorServiceClient {
 	}
 }
 
-func (d *DoctorServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) (*pb.StandardResponse, error) {
+func (d *DoctorServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) (*pb.SignInResponse, error) {
 	resp, err := d.service.DoctorSignin(req.Email, req.Password)
 	if err != nil {
-		return &pb.StandardResponse{Error: resp, StatusCode: 401, Status: "fail"}, nil
+		return &pb.SignInResponse{Message: resp, StatusCode: 401, Status: "fail"}, nil
 	}
-	return &pb.StandardResponse{Message: resp, StatusCode: 200, Status: "success"}, nil
+	return &pb.SignInResponse{DoctorId: resp, Message: "Successfully logged in", StatusCode: 200, Status: "success"}, nil
 }
 
 func (d *DoctorServiceClient) StoreAccessToken(ctx context.Context, req *pb.StoreAccessTokenRequest) (*pb.StandardResponse, error) {
@@ -37,7 +38,8 @@ func (d *DoctorServiceClient) StoreAccessToken(ctx context.Context, req *pb.Stor
 		Expiry:       time.Now(), // Assuming expiry is passed as string, you can convert it to `time.Time`
 	}
 
-	err := d.service.StoreAccessToken(ctx, req.DoctorId, token)
+	err := d.service.StoreAccessToken(ctx, req.Email, token)
+	fmt.Println("errr",err.Error())
 	if err != nil {
 		return &pb.StandardResponse{
 			Status:     "fail",
@@ -54,7 +56,7 @@ func (d *DoctorServiceClient) StoreAccessToken(ctx context.Context, req *pb.Stor
 }
 
 func (d *DoctorServiceClient) GetProfile(ctx context.Context, req *pb.GetProfileRequest) (*pb.GetProfileResponse, error) {
-	doctor, err := d.service.GetProfile(req.Email)
+	doctor, err := d.service.GetProfile(req.DoctorId)
 	if err != nil {
 		return &pb.GetProfileResponse{
 			Status:     "fail",
@@ -112,5 +114,32 @@ func (d *DoctorServiceClient) GetAccessToken(ctx context.Context, req *pb.GetAcc
 		StatusCode: 200,
 		Message:    "Token stored successfully",
 		Data:       anypbstruct,
+	}, nil
+}
+func (d *DoctorServiceClient) ConfirmSchedule(ctx context.Context, req *pb.ConfirmScheduleRequest) (*pb.ConfirmScheduleResponse, error) {
+	doctorID := req.DoctorId
+	schedules, err := d.service.FetchAndStoreDoctorAvailability(ctx, doctorID)
+	if err != nil {
+		return &pb.ConfirmScheduleResponse{
+			Status:     "fail",
+			StatusCode: 500,
+			Error:      err.Error(),
+		}, nil
+	}
+
+	var pbSchedules []*pb.Schedule
+	for _, schedule := range schedules {
+		pbSchedules = append(pbSchedules, &pb.Schedule{
+			EventId: schedule.EventType,
+			// Summary:   schedule.Summary,
+			StartTime: schedule.StartTime.Format(time.DateTime),
+			EndTime:   schedule.EndTime.Format(time.DateTime),
+		})
+	}
+
+	return &pb.ConfirmScheduleResponse{
+		Status:     "success",
+		StatusCode: 200,
+		Schedules:  pbSchedules,
 	}, nil
 }

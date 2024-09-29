@@ -8,17 +8,17 @@ import (
 type AdminService interface {
 	SignIn(admin domain.Admin) (string, error)
 	AddDoctor(email, name, password string, phone, specializationId int32) (string, error)
-	DeleteDoctor(doctorId string) (string,error)
-	// New methods for managing patients
+	DeleteDoctor(doctorId string) (string, error)
+	AddSpecialization(name, Description string) (string, error) 
 	AddPatient(patient domain.Patient) (string, error)
 	DeletePatient(patientID string) (string, error)
 	BlockPatient(patientID string, reason string) (string, error)
 	ListDoctors() ([]domain.Doctor, error)
-    ListPatients() ([]domain.Patient, error)
+	ListPatients() ([]domain.Patient, error)
 }
 type adminService struct {
-	repo       repository.AdminRepository
-	doctorRepo repository.DoctorRepository
+	repo        repository.AdminRepository
+	doctorRepo  repository.DoctorRepository
 	patientRepo repository.PatientRepository // Inject the PatientRepository
 }
 
@@ -54,6 +54,13 @@ func (a *adminService) DeleteDoctor(doctorId string) (string, error) {
 	}
 	return resp, nil
 }
+func (a *adminService) AddSpecialization(name, Description string) (string, error) {
+	resp, err := a.doctorRepo.CreateSpecialization(domain.DoctorSpecialization{Name: name, Description: Description})
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
 
 // AddPatient - Admin can add a patient
 func (a *adminService) AddPatient(patient domain.Patient) (string, error) {
@@ -82,10 +89,10 @@ func (a *adminService) BlockPatient(patientID string, reason string) (string, er
 	return resp, nil
 }
 func (s *adminService) ListDoctors() ([]domain.Doctor, error) {
-    return s.doctorRepo.ListDoctors()
+	return s.doctorRepo.ListDoctors()
 }
 
 // ListPatients returns a list of all patients
 func (s *adminService) ListPatients() ([]domain.Patient, error) {
-    return s.patientRepo.ListPatients()
+	return s.patientRepo.ListPatients()
 }
