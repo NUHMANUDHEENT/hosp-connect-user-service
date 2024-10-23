@@ -18,6 +18,8 @@ type DoctorService interface {
 	StoreAccessToken(ctx context.Context, email string, token *oauth2.Token) error
 	GetAccessToken(ctx context.Context, doctorID string) (*oauth2.Token, error)
 	FetchAndStoreDoctorAvailability(ctx context.Context, doctorID string) ([]domain.AvailabilitySlot, error)
+	GetAvailability(categoryId int32, reqDateTime time.Time) ([]domain.AvailabilitySlot, error)
+	GetAvailabilityByDoctorId(doctorId string) ([]domain.AvailableDates, error)
 }
 type doctorService struct {
 	repo repository.DoctorRepository
@@ -127,4 +129,21 @@ func (d *doctorService) FetchAndStoreDoctorAvailability(ctx context.Context, doc
 	}
 
 	return availability, nil
+}
+func (d *doctorService) GetAvailability(categoryId int32, reqDateTime time.Time) ([]domain.AvailabilitySlot, error) {
+	resp, err := d.repo.GetAvailabilityByCategory(categoryId, reqDateTime)
+	if err != nil {
+		return []domain.AvailabilitySlot{}, err
+	}
+	return resp, nil
+
+}
+func (d *doctorService) GetAvailabilityByDoctorId(doctorId string) ([]domain.AvailableDates, error) {
+	resp, err := d.repo.GetAvailabilityByDoctorId(doctorId)
+	fmt.Println("availabiluty=========", resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+
 }

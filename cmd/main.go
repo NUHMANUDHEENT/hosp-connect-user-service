@@ -9,10 +9,9 @@ import (
 
 func main() {
 	di.LoadEnv()
-	port := os.Getenv("USERPORT")
+	port := os.Getenv("USER_PORT")
 	listener, server := di.GRPCSetup(port)
 	if err := server.Serve(listener); err != nil {
 		log.Fatalf("Failed to serve gRPC server: %v", err)
 	}
 }
-																																																																																																																																																																																																																																																																																																																																																															

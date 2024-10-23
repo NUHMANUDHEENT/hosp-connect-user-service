@@ -7,9 +7,10 @@ import (
 
 type AdminService interface {
 	SignIn(admin domain.Admin) (string, error)
+	SignUp(email, name, password string) (string, error)
 	AddDoctor(email, name, password string, phone, specializationId int32) (string, error)
 	DeleteDoctor(doctorId string) (string, error)
-	AddSpecialization(name, Description string) (string, error) 
+	AddSpecialization(name, Description string) (string, error)
 	AddPatient(patient domain.Patient) (string, error)
 	DeletePatient(patientID string) (string, error)
 	BlockPatient(patientID string, reason string) (string, error)
@@ -34,13 +35,25 @@ func (a *adminService) SignIn(admin domain.Admin) (string, error) {
 	}
 	return resp, nil
 }
+func (a *adminService) SignUp(email, name, password string) (string, error) {
+	admin := domain.Admin{
+		Email:    email,
+		Name:     name,
+		Password: password,
+	}
+	resp, err := a.repo.SignUp(admin)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
 func (a *adminService) AddDoctor(email, name, password string, phone, specializationId int32) (string, error) {
 	resp, err := a.doctorRepo.SignUpStore(domain.Doctor{
-		Email:           email,
-		Name:            name,
-		Password:        password,
-		SpecilazationId: int(specializationId),
-		Phone:           int(phone),
+		Email:            email,
+		Name:             name,
+		Password:         password,
+		SpecializationId: int(specializationId),
+		Phone:            int(phone),
 	})
 	if err != nil {
 		return resp, err

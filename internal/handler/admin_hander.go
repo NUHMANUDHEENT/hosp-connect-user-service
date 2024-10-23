@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	pb "github.com/NUHMANUDHEENT/hosp-connect-pb/proto/admin"
@@ -25,7 +26,7 @@ func (a *AdminServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) 
 		Email:    req.GetEmail(),
 		Password: req.GetPassword(),
 	}
-	log.Println("signin request", admindetails)
+	log.Println("signin request ", admindetails)
 	resp, err := a.service.SignIn(admindetails)
 	if err != nil {
 		return &pb.SignInResponse{
@@ -33,7 +34,6 @@ func (a *AdminServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) 
 			Message:    "Invalid credentials, please try again.",
 			StatusCode: 401,
 		}, nil
-
 	}
 	return &pb.SignInResponse{
 		Status:     "success",
@@ -41,6 +41,24 @@ func (a *AdminServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest) 
 		StatusCode: 200,
 	}, nil
 }
+
+func (a *AdminServiceClient) SignUp(ctx context.Context, req *pb.SignUpRequest) (*pb.StandardResponse, error) {
+	log.Println("Signup admin  request ", req.Email, req.Name)
+	resp, err := a.service.SignUp(req.Email, req.Name, req.Password)
+	if err != nil {
+		return &pb.StandardResponse{
+			Status:     "fail",
+			Error:      resp,
+			StatusCode: 400,
+		}, nil
+	}
+	return &pb.StandardResponse{
+		Status:     "success",
+		Message:    resp,
+		StatusCode: 200,
+	}, nil
+}
+
 func (a *AdminServiceClient) AddDoctor(ctx context.Context, req *pb.AddDoctorRequest) (*pb.StandardResponse, error) {
 	log.Println("Regiter doctor  from admin with ", req.Email, req.Name)
 	resp, err := a.service.AddDoctor(req.Email, req.Name, req.Password, req.Phone, req.SpecializationId)
@@ -166,7 +184,7 @@ func (a *AdminServiceClient) ListDoctors(ctx context.Context, req *pb.Empty) (*p
 			Name:             doctor.Name,
 			Email:            doctor.Email,
 			Phone:            int32(doctor.Phone),
-			SpecializationId: int32(doctor.SpecilazationId),
+			SpecializationId: int32(doctor.SpecializationId),
 		})
 	}
 
@@ -199,7 +217,7 @@ func (a *AdminServiceClient) ListPatients(ctx context.Context, req *pb.Empty) (*
 			Gender:    patient.Gender,
 		})
 	}
-
+	fmt.Println("ListPatients", pbPatients)
 	return &pb.ListPatientsResponse{
 		Patients:   pbPatients,
 		Status:     "success",

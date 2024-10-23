@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/domain"
@@ -23,6 +24,8 @@ type DoctorRepository interface {
 	GetAccessToken(ctx context.Context, doctorID string) (*oauth2.Token, error)
 	StoreDoctorSchedules(schedules []domain.AvailabilitySlot) error
 	CreateSpecialization(specialize domain.DoctorSpecialization) (string, error)
+	GetAvailabilityByCategory(categoryId int32, reqDateTime time.Time) ([]domain.AvailabilitySlot, error)
+	GetAvailabilityByDoctorId(doctorId string) ([]domain.AvailableDates, error)
 }
 type doctorRepository struct {
 	db *gorm.DB
@@ -60,7 +63,6 @@ func (d *doctorRepository) SignUpStore(doctordetails domain.Doctor) (string, err
 	uuid := uuid.New()
 	doctordetails.DoctorId = fmt.Sprintf("dc-%s", uuid.String())
 
-	// Store the doctor details in the database
 	if err := d.db.Create(&doctordetails).Error; err != nil {
 		return "Email already exists", err
 	}
@@ -110,7 +112,7 @@ func (r *doctorRepository) StoreAccessToken(ctx context.Context, email string, t
 	var tokenStore domain.DoctorTokens
 	err := r.db.First(&tokenStore, "doctor_id=?", doctorDetails.DoctorId).Error
 	tokenStore = domain.DoctorTokens{
-		DoctorId:     tokenStore.DoctorId,
+		DoctorId:     doctorDetails.DoctorId,
 		AccessToken:  token.AccessToken,
 		RefreshToken: token.RefreshToken,
 		ExpiresAt:    token.Expiry,
@@ -143,6 +145,13 @@ func (r *doctorRepository) GetAccessToken(ctx context.Context, doctorID string) 
 	return token, nil
 }
 func (r *doctorRepository) StoreDoctorSchedules(schedules []domain.AvailabilitySlot) error {
+	doctors := domain.Doctor{}
+	if err := r.db.Where("doctor_id = ?", schedules[0].DoctorID).First(&doctors).Error; err != nil {
+		return err
+	}
+	for i, _ := range schedules {
+		schedules[i].DoctorName = doctors.Name
+	}
 	result := r.db.Create(&schedules)
 
 	if result.Error != nil {
@@ -150,11 +159,110 @@ func (r *doctorRepository) StoreDoctorSchedules(schedules []domain.AvailabilityS
 	}
 
 	return nil
-
 }
 func (r *doctorRepository) CreateSpecialization(specialize domain.DoctorSpecialization) (string, error) {
 	if err := r.db.Create(&specialize).Error; err != nil {
 		return "Category is already exist", err
 	}
 	return "Category created successfully", nil
+}
+
+// doctorRepository.go
+func (r *doctorRepository) GetAvailabilityByCategory(categoryId int32, reqDateTime time.Time) ([]domain.AvailabilitySlot, error) {
+	var availabilities []domain.AvailabilitySlot
+
+	// Query doctors with the provided CategoryId
+	doctors := []domain.Doctor{}
+	if err := r.db.Where("specialization_id = ?", categoryId).Find(&doctors).Error; err != nil {
+		return nil, err
+	}
+	// Extract Doctor IDs from the result
+	doctorIds := make([]string, len(doctors))
+	for i, doctor := range doctors {
+		doctorIds[i] = doctor.DoctorId
+	}
+	fmt.Println("Requested doctors", doctorIds, "for date:", reqDateTime)
+
+	// Fetch unavailable slots for doctors in the category (those who have scheduled unavailability during the requested time)
+	unavailableDoctors := []domain.AvailabilitySlot{}
+	if err := r.db.Where("doctor_id IN (?)", doctorIds).
+		Where("start_time <= ?", reqDateTime).
+		Where("end_time >= ?", reqDateTime).
+		Find(&unavailableDoctors).Error; err != nil {
+		return nil, err
+	}
+
+	// Create a set of unavailable doctor IDs for quick lookup
+	unavailableDoctorIds := map[string]bool{}
+	for _, slot := range unavailableDoctors {
+		unavailableDoctorIds[slot.DoctorID] = true
+	}
+
+	// Filter out unavailable doctors
+	for _, doctor := range doctors {
+		if !unavailableDoctorIds[doctor.DoctorId] {
+			availabilities = append(availabilities, domain.AvailabilitySlot{
+				DoctorID:   doctor.DoctorId,
+				DoctorName: doctor.Name,
+			})
+		}
+	}
+
+	if len(availabilities) == 0 {
+		fmt.Println("No doctors are available at the requested time")
+		return nil, nil
+	}
+
+	return availabilities, nil
+}
+
+func (r *doctorRepository) GetAvailabilityByDoctorId(doctorId string) ([]domain.AvailableDates, error) {
+	var leaveDate []domain.AvailabilitySlot
+
+	startime := time.Now()
+	endtime := time.Now().AddDate(0, 0, 7)
+	if err := r.db.Model(&domain.AvailabilitySlot{}).
+		Where("doctor_id = ? AND start_time >? AND start_time<?", doctorId, startime, endtime).
+		Find(&leaveDate).Error; err != nil {
+		return nil, err
+	}
+	if leaveDate == nil {
+		return nil, errors.New("no slot available on next 7 days")
+	}
+	available := Create7daysAvailability(leaveDate)
+
+	return available, nil // Doctor is available
+}
+func Create7daysAvailability(leaveDates []domain.AvailabilitySlot) []domain.AvailableDates {
+	var availability []domain.AvailableDates
+
+	// Start from the current day and check the next 7 days
+	startTime := time.Now()
+	endTime := time.Now().AddDate(0, 0, 7)
+
+	// Iterate through each day for the next 7 days
+	for current := startTime; current.Before(endTime); current = current.AddDate(0, 0, 1) {
+		// Skip Sundays
+		if current.Weekday() == time.Sunday {
+			continue
+		}
+
+		// Check if the current date is in the leave list
+		isAvailable := "available"
+		for _, leave := range leaveDates {
+			if leave.StartTime.Year() == current.Year() &&
+				leave.StartTime.YearDay() == current.YearDay() {
+				isAvailable = "unavailable"
+				break
+			}
+		}
+
+		// Append the availability status for the current day
+		availability = append(availability, domain.AvailableDates{
+			DateTime:        current,
+			IsAvailable: isAvailable,
+		})
+	}
+
+	return availability
 }

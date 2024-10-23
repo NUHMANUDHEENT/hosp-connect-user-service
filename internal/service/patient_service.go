@@ -13,6 +13,8 @@ type PatientService interface {
 	SignUpVerify(token string) (string, error)
 	GetProfile(patientId string) (domain.Patient, error)
 	UpdateProfile(patient domain.Patient) error
+	AddPrescription(data domain.PatientPrescription) error
+	GetPrescription(patientId, query string) ([]domain.PatientPrescription, error)
 }
 
 type patientService struct {
@@ -65,4 +67,11 @@ func (p *patientService) GetProfile(patientId string) (domain.Patient, error) {
 
 func (p *patientService) UpdateProfile(patient domain.Patient) error {
 	return p.repo.UpdateProfile(patient)
+}
+
+func (p *patientService) AddPrescription(data domain.PatientPrescription) error {
+	return p.repo.StorePatientPrescription(data)
+}
+func (p patientService) GetPrescription(patientId, query string) ([]domain.PatientPrescription, error) {
+	return p.repo.GetPrescriptions(patientId, query)
 }

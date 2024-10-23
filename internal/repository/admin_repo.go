@@ -9,6 +9,7 @@ import (
 
 type AdminRepository interface {
 	SignIn(admin domain.Admin) (string, error)
+	SignUp(admin domain.Admin) (string, error)
 }
 
 type adminRepository struct {
@@ -33,4 +34,11 @@ func (a *adminRepository) SignIn(admin domain.Admin) (string, error) {
 	// }
 	fmt.Println("no error")
 	return "Successfully login", nil
+}
+func (a *adminRepository) SignUp(admin domain.Admin) (string, error){
+	admin.Role = "admin"
+	if err := a.db.Create(&admin).Error; err != nil {
+		return "Email already exists", err
+	}
+	return "admin registered successfully", nil
 }

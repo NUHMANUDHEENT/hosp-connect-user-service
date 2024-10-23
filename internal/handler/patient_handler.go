@@ -2,6 +2,8 @@ package handler
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"log"
 
 	pb "github.com/NUHMANUDHEENT/hosp-connect-pb/proto/patient"
@@ -87,6 +89,7 @@ func (p *PatientServiceClient) SignUpVerify(ctx context.Context, req *pb.SignUpV
 	}, nil
 }
 func (p *PatientServiceClient) GetProfile(ctx context.Context, req *pb.GetProfileRequest) (*pb.GetProfileResponse, error) {
+	fmt.Println("pat", req.PatientId)
 	patient, err := p.service.GetProfile(req.PatientId)
 	if err != nil {
 		return &pb.GetProfileResponse{
@@ -96,6 +99,7 @@ func (p *PatientServiceClient) GetProfile(ctx context.Context, req *pb.GetProfil
 		}, nil
 	}
 
+	fmt.Println("e", patient.Email)
 	return &pb.GetProfileResponse{
 		Email:      patient.Email,
 		Name:       patient.Name,
@@ -127,5 +131,81 @@ func (p *PatientServiceClient) UpdateProfile(ctx context.Context, req *pb.Update
 		Message:    "Profile updated successfully",
 		Status:     "success",
 		StatusCode: 200,
+	}, nil
+}
+func (p *PatientServiceClient) AddPrescription(ctx context.Context, req *pb.AddPrescriptionRequest) (*pb.StandardResponse, error) {
+	log.Printf("request for storing prescription from doctorid : %s to patient id: %s", req.DoctorId, req.PatientId)
+	var patientPrescription domain.PatientPrescription
+
+	patientPrescription.PatientId = req.PatientId
+	patientPrescription.DoctorId = req.DoctorId
+	var presc []domain.Prescription
+	for _, v := range req.Prescription {
+		prescription := domain.Prescription{
+			Medication: v.Medication,
+			Dosage:     v.Dosage,
+			Frequency:  v.Frequency,
+		}
+		presc = append(presc, prescription)
+	}
+	jsonPrescriptions, err := json.Marshal(presc)
+	if err != nil {
+		return &pb.StandardResponse{
+			Status:     "fail",
+			Message:    err.Error(),
+			StatusCode: 400,
+		}, nil
+	}
+	patientPrescription.Prescription = string(jsonPrescriptions)
+	// Store the patientPrescription object into the database
+	if err := p.service.AddPrescription(patientPrescription); err != nil {
+		return &pb.StandardResponse{
+			Status:     "fail",
+			Message:    err.Error(),
+			StatusCode: 400,
+		}, nil
+	}
+	// Return a success response
+	return &pb.StandardResponse{
+		Status:  "success",
+		Message: "Prescription added successfully",
+	}, nil
+}
+func (p PatientServiceClient) GetPrescription(ctx context.Context, req *pb.GetPrescriptionRequest) (*pb.GetPrescriptionResponse, error) {
+	log.Printf("request for getting prescription from patient id: %s  , %s", req.PatientId, req.Query)
+	resp, err := p.service.GetPrescription(req.PatientId, req.Query)
+	if err != nil {
+		return &pb.GetPrescriptionResponse{
+			Prescriptions: nil,
+			Status:        "fail",
+			StatusCode:    "400",
+			Message:       "No prescription found",
+		}, nil
+	}
+	var prescriptions []*pb.GetPresc
+	for _, v := range resp {
+		var presc []*pb.Prescription
+		if err := json.Unmarshal([]byte(v.Prescription), &presc); err != nil {
+			log.Printf("error unmarshalling prescription for patient %s: %v", req.PatientId, err)
+			return &pb.GetPrescriptionResponse{
+				Prescriptions: nil,
+				Status:        "fail",
+				StatusCode:    "500",
+				Message:       "Failed to process prescriptions",
+			}, nil
+		}
+		prescriptions = append(prescriptions, &pb.GetPresc{
+			DoctorId:         v.DoctorId,
+			PrescriptionTime: v.CreatedAt.Format("2006-01-02"),
+			Treatment:        presc,
+		})
+
+	}
+	fmt.Println("pres", prescriptions)
+
+	return &pb.GetPrescriptionResponse{
+		Prescriptions: prescriptions,
+		Status:        "success",
+		StatusCode:    "200",
 	}, nil
 }

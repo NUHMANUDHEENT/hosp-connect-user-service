@@ -3,6 +3,7 @@ package repository
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/domain"
@@ -20,6 +21,8 @@ type PatientRepository interface {
 	GetProfile(patientId string) (domain.Patient, error)
 	UpdateProfile(patient domain.Patient) error
 	ListPatients() ([]domain.Patient, error)
+	StorePatientPrescription(data domain.PatientPrescription) error
+	GetPrescriptions(patientId, query string) ([]domain.PatientPrescription, error)
 }
 type patientRepository struct {
 	db *gorm.DB
@@ -42,7 +45,7 @@ func (p *patientRepository) SignIn(patient domain.Patient) (string, error) {
 		return "Your account is blocked", errors.New("account is blocked")
 	}
 
-	return patient.PatientID, nil
+	return patientCheck.PatientID, nil
 }
 
 // Patient SignUp Repository logic
@@ -57,11 +60,10 @@ func (p *patientRepository) SignUp(patient domain.Patient) (string, error) {
 		return "", err
 	}
 	uuid := uuid.New()
-	existingPatient.PatientID = fmt.Sprintf("pt-%s", uuid.String())
+	patient.PatientID = fmt.Sprintf("pt-%s", uuid.String())
 
 	patient.Password = string(hashedPassword)
 	patient.VerifyStatus = false
-	fmt.Println(existingPatient)
 
 	// Save the new patient to the database
 	if err := p.db.Create(&patient).Error; err != nil {
@@ -99,12 +101,21 @@ func (p *patientRepository) Block(patientID string, reason string) (string, erro
 	if err := p.db.First(&patient, patientID).Error; err != nil {
 		return "Patient not found", err
 	}
-	patient.IsBlock = true
-	patient.IsBlockReason = reason
-	if err := p.db.Where("email = ?", patient.Email).Model(&patient).Updates(patient).Error; err != nil {
+	if patient.IsBlock {
+		patient.IsBlock = false
+		patient.IsBlockReason = ""
+	} else {
+		patient.IsBlock = true
+		patient.IsBlockReason = reason
+	}
+	if err := p.db.Where("id = ?", patient.ID).Model(&patient).Updates(patient).Error; err != nil {
 		return "blocking failed", err
 	}
+	if !patient.IsBlock {
+		return "Patient Unblocked successfully", nil
+	}
 	return "Patient blocked successfully", nil
+
 }
 
 func (p *patientRepository) GetProfile(patientId string) (domain.Patient, error) {
@@ -128,4 +139,33 @@ func (p *patientRepository) ListPatients() ([]domain.Patient, error) {
 		return nil, err
 	}
 	return patients, nil
+}
+func (p *patientRepository) StorePatientPrescription(data domain.PatientPrescription) error {
+
+	var patient domain.Patient
+	if err := p.db.First(&patient, "patient_id =?", data.PatientId).Error; err != nil {
+		return errors.New("patient not found")
+	}
+	if err := p.db.Create(&data).Error; err != nil {
+		return err
+	}
+	return nil
+}
+func (p *patientRepository) GetPrescriptions(patientId, query string) ([]domain.PatientPrescription, error) {
+	var prescriptions []domain.PatientPrescription
+	currentDate := time.Now()
+
+	switch query {
+	case "today":
+		if err := p.db.Where("patient_id = ? AND DATE(created_at) = ?", patientId, currentDate.Format("2006-01-02")).Find(&prescriptions).Error; err != nil {
+			return nil, err
+		}
+	case "old":
+		if err := p.db.Where("patient_id = ? AND DATE(created_at) < ?", patientId, currentDate.Format("2006-01-02")).Find(&prescriptions).Error; err != nil {
+			return nil, err
+		}
+	default:
+		return nil, errors.New("invalid query type")
+	}
+	return prescriptions, nil
 }

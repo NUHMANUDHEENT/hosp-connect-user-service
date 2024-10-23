@@ -2,7 +2,6 @@ package handler
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	pb "github.com/NUHMANUDHEENT/hosp-connect-pb/proto/doctor"
@@ -31,30 +30,6 @@ func (d *DoctorServiceClient) SignIn(ctx context.Context, req *pb.SignInRequest)
 	return &pb.SignInResponse{DoctorId: resp, Message: "Successfully logged in", StatusCode: 200, Status: "success"}, nil
 }
 
-func (d *DoctorServiceClient) StoreAccessToken(ctx context.Context, req *pb.StoreAccessTokenRequest) (*pb.StandardResponse, error) {
-	token := &oauth2.Token{
-		AccessToken:  req.AccessToken,
-		RefreshToken: req.RefreshToken,
-		Expiry:       time.Now(), // Assuming expiry is passed as string, you can convert it to `time.Time`
-	}
-
-	err := d.service.StoreAccessToken(ctx, req.Email, token)
-	fmt.Println("errr",err.Error())
-	if err != nil {
-		return &pb.StandardResponse{
-			Status:     "fail",
-			StatusCode: 500,
-			Error:      err.Error(),
-		}, nil
-	}
-
-	return &pb.StandardResponse{
-		Status:     "success",
-		StatusCode: 200,
-		Message:    "Token stored successfully",
-	}, nil
-}
-
 func (d *DoctorServiceClient) GetProfile(ctx context.Context, req *pb.GetProfileRequest) (*pb.GetProfileResponse, error) {
 	doctor, err := d.service.GetProfile(req.DoctorId)
 	if err != nil {
@@ -69,7 +44,7 @@ func (d *DoctorServiceClient) GetProfile(ctx context.Context, req *pb.GetProfile
 		Email:            doctor.Email,
 		Name:             doctor.Name,
 		Phone:            int32(doctor.Phone),
-		SpecializationId: int32(doctor.SpecilazationId),
+		SpecializationId: int32(doctor.SpecializationId),
 		Status:           "success",
 		StatusCode:       200,
 	}, nil
@@ -77,10 +52,10 @@ func (d *DoctorServiceClient) GetProfile(ctx context.Context, req *pb.GetProfile
 
 func (d *DoctorServiceClient) UpdateProfile(ctx context.Context, req *pb.UpdateProfileRequest) (*pb.StandardResponse, error) {
 	err := d.service.UpdateProfile(domain.Doctor{
-		DoctorId:        req.Doctor.DoctorId,
-		Name:            req.Doctor.Name,
-		Email:           req.Doctor.Email,
-		SpecilazationId: int(req.Doctor.SpecializationId),
+		DoctorId:         req.Doctor.DoctorId,
+		Name:             req.Doctor.Name,
+		Email:            req.Doctor.Email,
+		SpecializationId: int(req.Doctor.SpecializationId),
 	})
 	if err != nil {
 		return &pb.StandardResponse{
@@ -92,6 +67,29 @@ func (d *DoctorServiceClient) UpdateProfile(ctx context.Context, req *pb.UpdateP
 		Message:    "Profile updated successfully",
 		Status:     "success",
 		StatusCode: 200,
+	}, nil
+}
+
+func (d *DoctorServiceClient) StoreAccessToken(ctx context.Context, req *pb.StoreAccessTokenRequest) (*pb.StandardResponse, error) {
+	token := &oauth2.Token{
+		AccessToken:  req.AccessToken,
+		RefreshToken: req.RefreshToken,
+		Expiry:       time.Now(), // Assuming expiry is passed as string, you can convert it to `time.Time`
+	}
+
+	err := d.service.StoreAccessToken(ctx, req.Email, token)
+	if err != nil {
+		return &pb.StandardResponse{
+			Status:     "fail",
+			StatusCode: 500,
+			Error:      err.Error(),
+		}, nil
+	}
+
+	return &pb.StandardResponse{
+		Status:     "success",
+		StatusCode: 200,
+		Message:    "Token stored successfully",
 	}, nil
 }
 
@@ -141,5 +139,49 @@ func (d *DoctorServiceClient) ConfirmSchedule(ctx context.Context, req *pb.Confi
 		Status:     "success",
 		StatusCode: 200,
 		Schedules:  pbSchedules,
+	}, nil
+}
+
+// doctor_handler.go
+
+func (d *DoctorServiceClient) GetAvailability(ctx context.Context, req *pb.GetAvailabilityRequest) (*pb.GetAvailabilityResponse, error) {
+	categoryId := req.CategoryId
+	reqDateTime := req.RequestedDateTime.AsTime() // Convert Protobuf Timestamp to Go's time.Time
+	// Call the service to get availability for the requested category and date/time
+	availability, err := d.service.GetAvailability(categoryId, reqDateTime)
+	if err != nil {
+		return nil, err
+	}
+	response := &pb.GetAvailabilityResponse{
+		AvailableSlots: []*pb.AvailabilitySlot{}, // This should be populated with slots
+	}
+
+	for _, doctor := range availability {
+		response.AvailableSlots = append(response.AvailableSlots, &pb.AvailabilitySlot{
+			DoctorId:   doctor.DoctorID,
+			DoctorName: doctor.DoctorName,
+		})
+	}
+	return &pb.GetAvailabilityResponse{
+		AvailableSlots: response.AvailableSlots,
+	}, nil
+}
+func (d *DoctorServiceClient) CheckAvailabilityByDoctorId(ctx context.Context, req *pb.CheckAvailabilityByDoctorIdRequest) (*pb.CheckAvailabilityByDoctorIdResponse, error) {
+	resp, err := d.service.GetAvailabilityByDoctorId(req.DoctorId)
+	if err != nil {
+		return &pb.CheckAvailabilityByDoctorIdResponse{
+			Status: "fail",
+		}, nil
+	}
+	var availability []*pb.DoctorAvailability
+	for _, v := range resp {
+		availability = append(availability, &pb.DoctorAvailability{
+			DateTime:    v.DateTime.Format(time.ANSIC),
+			IsAvailable: v.IsAvailable,
+		})
+	}
+	return &pb.CheckAvailabilityByDoctorIdResponse{
+		DoctorAvailability: availability,
+		Status:             "success",
 	}, nil
 }

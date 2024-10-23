@@ -38,6 +38,6 @@ func GRPCSetup(port string) (net.Listener, *grpc.Server) {
 	docpb.RegisterDoctorServiceServer(server, doctorHandler)
 	patientpb.RegisterPatientServiceServer(server, patientHandler)
 
-	log.Printf("Admin gRPC service is running on port %s", port)
+	log.Printf("User gRPC service is running on port %s", port)
 	return listener, server
 }
