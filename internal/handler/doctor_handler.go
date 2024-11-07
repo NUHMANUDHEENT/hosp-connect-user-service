@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	pb "github.com/NUHMANUDHEENT/hosp-connect-pb/proto/doctor"
@@ -55,6 +56,7 @@ func (d *DoctorServiceClient) UpdateProfile(ctx context.Context, req *pb.UpdateP
 		DoctorId:         req.Doctor.DoctorId,
 		Name:             req.Doctor.Name,
 		Email:            req.Doctor.Email,
+		Phone:            int(req.Doctor.Phone),
 		SpecializationId: int(req.Doctor.SpecializationId),
 	})
 	if err != nil {
@@ -184,4 +186,15 @@ func (d *DoctorServiceClient) CheckAvailabilityByDoctorId(ctx context.Context, r
 		DoctorAvailability: availability,
 		Status:             "success",
 	}, nil
+}
+func (p *DoctorServiceClient) GetTotalDoctor(ctx context.Context, req *pb.GetTotalDoctorCountRequest) (*pb.GetTotalDoctorCountResponse, error) {
+	count, err := p.service.GetDoctorCount()
+	if err != nil {
+		return &pb.GetTotalDoctorCountResponse{}, errors.New("failed to fetch count")
+	}
+
+	return &pb.GetTotalDoctorCountResponse{
+		DoctorCount: float64(count),
+	}, nil
+
 }

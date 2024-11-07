@@ -91,22 +91,6 @@ func (a *AdminServiceClient) DeleteDoctor(ctx context.Context, req *pb.DeleteDoc
 		StatusCode: 200,
 	}, nil
 }
-func (a *AdminServiceClient) AddSpecialization(ctx context.Context, req *pb.AddSpecializationRequest) (*pb.StandardResponse, error) {
-	log.Println("Adding specialization with name: ", req.Name)
-	resp, err := a.service.AddSpecialization(req.Name, req.Description)
-	if err != nil {
-		return &pb.StandardResponse{
-			Status:     "fail",
-			Error:      err.Error(),
-			StatusCode: 400,
-		}, nil
-	}
-	return &pb.StandardResponse{
-		Status:     "success",
-		Message:    resp,
-		StatusCode: 200,
-	}, nil
-}
 
 // Add Patient
 func (a *AdminServiceClient) AddPatient(ctx context.Context, req *pb.AddPatientRequest) (*pb.StandardResponse, error) {

@@ -23,9 +23,9 @@ type DoctorRepository interface {
 	StoreAccessToken(ctx context.Context, email string, token *oauth2.Token) error
 	GetAccessToken(ctx context.Context, doctorID string) (*oauth2.Token, error)
 	StoreDoctorSchedules(schedules []domain.AvailabilitySlot) error
-	CreateSpecialization(specialize domain.DoctorSpecialization) (string, error)
 	GetAvailabilityByCategory(categoryId int32, reqDateTime time.Time) ([]domain.AvailabilitySlot, error)
 	GetAvailabilityByDoctorId(doctorId string) ([]domain.AvailableDates, error)
+	GetDoctorCount() (int, error)
 }
 type doctorRepository struct {
 	db *gorm.DB
@@ -89,7 +89,7 @@ func (d *doctorRepository) GetProfile(email string) (domain.Doctor, error) {
 
 // UpdateProfile updates a doctor's profile
 func (d *doctorRepository) UpdateProfile(doctor domain.Doctor) error {
-	if err := d.db.Where("doctor_id =?", doctor.Email).Model(&doctor).Updates(doctor).Error; err != nil {
+	if err := d.db.Where("doctor_id =?", doctor.DoctorId).Model(&doctor).Updates(doctor).Error; err != nil {
 		return err
 	}
 	return nil
@@ -159,12 +159,6 @@ func (r *doctorRepository) StoreDoctorSchedules(schedules []domain.AvailabilityS
 	}
 
 	return nil
-}
-func (r *doctorRepository) CreateSpecialization(specialize domain.DoctorSpecialization) (string, error) {
-	if err := r.db.Create(&specialize).Error; err != nil {
-		return "Category is already exist", err
-	}
-	return "Category created successfully", nil
 }
 
 // doctorRepository.go
@@ -259,10 +253,15 @@ func Create7daysAvailability(leaveDates []domain.AvailabilitySlot) []domain.Avai
 
 		// Append the availability status for the current day
 		availability = append(availability, domain.AvailableDates{
-			DateTime:        current,
+			DateTime:    current,
 			IsAvailable: isAvailable,
 		})
 	}
 
 	return availability
+}
+func (p *doctorRepository) GetDoctorCount() (int, error) {
+	var count int64
+	err := p.db.Model(&domain.Doctor{}).Count(&count).Error
+	return int(count), err
 }

@@ -11,6 +11,7 @@ import (
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/handler"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/repository"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/service"
+	"github.com/nuhmanudheent/hosp-connect-user-service/logs"
 	"google.golang.org/grpc"
 )
 
@@ -20,14 +21,15 @@ func GRPCSetup(port string) (net.Listener, *grpc.Server) {
 		log.Fatalf("Failed to listen on port %s: %v", port, err)
 	}
 	db := database.InitDatabase()
+	logger := logs.NewLogger()
 
 	adminRepo := repository.NewAdminRepository(db)
 	doctorRepo := repository.NewDoctorRepository(db)
 	patientRepo := repository.NewPatientRepository(db)
 
-	adminService := service.NewAdminService(adminRepo, doctorRepo, patientRepo)
-	doctorService := service.NewDoctorService(doctorRepo)
-	patientService := service.NewPatientService(patientRepo)
+	adminService := service.NewAdminService(adminRepo, doctorRepo, patientRepo, logger)
+	doctorService := service.NewDoctorService(doctorRepo, logger)
+	patientService := service.NewPatientService(patientRepo, logger)
 
 	adminHandler := handler.NewAdminHandler(adminService)
 	doctorHandler := handler.NewDoctorHandler(doctorService)

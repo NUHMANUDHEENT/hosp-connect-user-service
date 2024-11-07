@@ -23,6 +23,7 @@ type PatientRepository interface {
 	ListPatients() ([]domain.Patient, error)
 	StorePatientPrescription(data domain.PatientPrescription) error
 	GetPrescriptions(patientId, query string) ([]domain.PatientPrescription, error)
+	GetPatientCount() (int, error)
 }
 type patientRepository struct {
 	db *gorm.DB
@@ -127,7 +128,7 @@ func (p *patientRepository) GetProfile(patientId string) (domain.Patient, error)
 }
 
 func (p *patientRepository) UpdateProfile(patient domain.Patient) error {
-	if err := p.db.Where("patient_id = ?", patient.Email).Model(&patient).Updates(patient).Error; err != nil {
+	if err := p.db.Where("patient_id = ?", patient.PatientID).Model(&patient).Updates(patient).Error; err != nil {
 		return err
 	}
 	return nil
@@ -168,4 +169,9 @@ func (p *patientRepository) GetPrescriptions(patientId, query string) ([]domain.
 		return nil, errors.New("invalid query type")
 	}
 	return prescriptions, nil
+}
+func (p *patientRepository) GetPatientCount() (int, error) {
+	var count int64
+	err := p.db.Model(&domain.Patient{}).Count(&count).Error
+	return int(count), err
 }

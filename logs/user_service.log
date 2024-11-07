@@ -1,0 +1,159 @@
+{"function":"GetAppointmentByID","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Fetching appointment details","time":"2024-10-31T19:05:41+05:30"}
+{"function":"GetAppointmentByID","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Appointment fetched successfully","status":"success","time":"2024-10-31T19:05:41+05:30"}
+{"function":"GetAppointmentByID","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Fetching appointment details","time":"2024-10-31T19:07:11+05:30"}
+{"function":"GetAppointmentByID","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Appointment fetched successfully","status":"success","time":"2024-10-31T19:07:12+05:30"}
+{"function":"GetAppointmentByID","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Fetching appointment details","time":"2024-10-31T19:07:18+05:30"}
+{"function":"GetAppointmentByID","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Appointment fetched successfully","status":"success","time":"2024-10-31T19:07:18+05:30"}
+{"function":"PatientSignIn","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Checking creadentinals","time":"2024-10-31T19:09:12+05:30"}
+{"function":"PatientSignIn","id":"nuhman.nuhu.9497@gmail.com","level":"info","msg":"Patient Login successfull","status":"success","time":"2024-10-31T19:09:12+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-10-31T19:14:13+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-10-31T19:14:13+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-10-31T19:15:41+05:30"}
+{"error":"crypto/bcrypt: hashedPassword is not the hash of the given password","function":"PatientSignIn","id":"nu****@gmail.com","level":"error","msg":"Login failed for patient","time":"2024-10-31T19:15:41+05:30"}
+{"email":"nu****@gmail.com","function":"PatientSignUp","level":"info","msg":"Attempting patient signup","time":"2024-10-31T19:21:16+05:30"}
+{"email":"nu****@gmail.com","error":"email already in use","function":"PatientSignUp","level":"error","msg":"Signup failed for patient","time":"2024-10-31T19:21:16+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-10-31T21:33:16+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-10-31T21:33:16+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-10-31T21:33:21+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-10-31T21:33:21+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-10-31T22:22:22+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-10-31T22:22:22+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-10-31T22:22:28+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-10-31T22:22:29+05:30"}
+{"function":"GetProfile","level":"info","msg":"Fetching doctor profile","time":"2024-10-31T22:25:59+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-10-31T22:25:59+05:30"}
+{"function":"GetProfile","level":"info","msg":"Fetching doctor profile","time":"2024-10-31T22:28:27+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-10-31T22:28:27+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:29:04+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:29:04+05:30"}
+{"function":"GetProfile","level":"info","msg":"Fetching doctor profile","time":"2024-10-31T22:29:07+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-10-31T22:29:07+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:30:41+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:30:41+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:32:26+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:32:26+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:32:33+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:32:33+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:33:33+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:33:33+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:33:46+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:33:46+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:34:17+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:34:17+05:30"}
+{"function":"GetProfile","id":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","level":"info","msg":"Fetching doctor profile","time":"2024-10-31T22:34:20+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-10-31T22:34:20+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Attempting to update doctor profile","time":"2024-10-31T22:34:50+05:30"}
+{"doctorID":0,"function":"UpdateProfile","level":"info","msg":"Doctor profile updated successfully","status":"success","time":"2024-10-31T22:34:50+05:30"}
+{"function":"GetProfile","id":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","level":"info","msg":"Fetching doctor profile","time":"2024-10-31T22:34:53+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-10-31T22:34:53+05:30"}
+{"function":"GetProfile","id":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","level":"info","msg":"Fetching doctor profile","time":"2024-10-31T22:35:00+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-10-31T22:35:00+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"FetchAndStoreDoctorAvailability","level":"info","msg":"Fetching doctor availability","time":"2024-10-31T22:35:11+05:30"}
+{"error":"Get \"https://www.googleapis.com/calendar/v3/calendars/primary/events?alt=json\u0026orderBy=startTime\u0026prettyPrint=false\u0026singleEvents=true\u0026timeMax=2024-11-07T22%3A35%3A11%2B05%3A30\u0026timeMin=2024-10-31T22%3A35%3A11%2B05%3A30\": dial tcp: lookup www.googleapis.com on 127.0.0.53:53: read udp 127.0.0.1:47257-\u003e127.0.0.53:53: i/o timeout","function":"FetchAndStoreDoctorAvailability","level":"error","msg":"Failed to fetch events from calendar","time":"2024-10-31T22:35:22+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-10-31T22:39:01+05:30"}
+{"error":"crypto/bcrypt: hashedPassword is not the hash of the given password","function":"PatientSignIn","id":"nu****@gmail.com","level":"error","msg":"Login failed for patient","time":"2024-10-31T22:39:01+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-10-31T22:39:08+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-10-31T22:39:09+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-10-31T22:47:17+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-10-31T22:47:17+05:30"}
+{"email":"nu****@gmail.com","function":"AddPatient","level":"info","msg":"Attempting to add a new patient","name":"nuhman","time":"2024-10-31T22:47:21+05:30"}
+{"email":"nu****@gmail.com","function":"AddPatient","level":"info","msg":"Patient added successfully","status":"success","time":"2024-10-31T22:47:21+05:30"}
+{"email":"nu****@gmail.com","function":"AddPatient","level":"info","msg":"Attempting to add a new patient","name":"nuhman","time":"2024-10-31T22:47:33+05:30"}
+{"email":"nu****@gmail.com","error":"email already in use","function":"AddPatient","level":"error","msg":"Failed to add patient","time":"2024-10-31T22:47:33+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Attempting to delete patient","patientId":"5","time":"2024-10-31T22:47:43+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Patient deleted successfully","patientId":"5","status":"success","time":"2024-10-31T22:47:43+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Attempting to delete patient","patientId":"8","time":"2024-10-31T22:47:47+05:30"}
+{"error":"record not found","function":"DeletePatient","level":"error","msg":"Failed to delete patient","patientId":"8","time":"2024-10-31T22:47:47+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Attempting to delete patient","patientId":"6","time":"2024-10-31T22:47:50+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Patient deleted successfully","patientId":"6","status":"success","time":"2024-10-31T22:47:50+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Attempting to delete patient","patientId":"7","time":"2024-10-31T22:47:53+05:30"}
+{"error":"record not found","function":"DeletePatient","level":"error","msg":"Failed to delete patient","patientId":"7","time":"2024-10-31T22:47:53+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-10-31T22:47:56+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-10-31T22:47:56+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Attempting to block patient","patientId":"1","reason":"nil","time":"2024-10-31T22:48:06+05:30"}
+{"error":"record not found","function":"BlockPatient","level":"error","msg":"Failed to block patient","patientId":"1","time":"2024-10-31T22:48:06+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Attempting to block patient","patientId":"2","reason":"nil","time":"2024-10-31T22:48:11+05:30"}
+{"error":"record not found","function":"BlockPatient","level":"error","msg":"Failed to block patient","patientId":"2","time":"2024-10-31T22:48:11+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Attempting to block patient","patientId":"3","reason":"nil","time":"2024-10-31T22:48:14+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Patient blocked successfully","patientId":"3","status":"success","time":"2024-10-31T22:48:14+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Attempting to block patient","patientId":"3","reason":"nil","time":"2024-10-31T22:48:16+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Patient blocked successfully","patientId":"3","status":"success","time":"2024-10-31T22:48:16+05:30"}
+{"function":"ListPatients","level":"info","msg":"Fetching list of patients","time":"2024-10-31T22:48:20+05:30"}
+{"count":2,"function":"ListPatients","level":"info","msg":"List of patients retrieved successfully","status":"success","time":"2024-10-31T22:48:20+05:30"}
+{"function":"ListDoctors","level":"info","msg":"Fetching list of doctors","time":"2024-10-31T22:48:46+05:30"}
+{"count":2,"function":"ListDoctors","level":"info","msg":"List of doctors retrieved successfully","status":"success","time":"2024-10-31T22:48:46+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-01T09:16:03+05:30"}
+{"error":"record not found","function":"PatientSignIn","id":"nu****@gmail.com","level":"error","msg":"Login failed for patient","time":"2024-11-01T09:16:03+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-01T09:16:19+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-01T09:16:19+05:30"}
+{"function":"ListPatients","level":"info","msg":"Fetching list of patients","time":"2024-11-01T09:16:29+05:30"}
+{"count":2,"function":"ListPatients","level":"info","msg":"List of patients retrieved successfully","status":"success","time":"2024-11-01T09:16:29+05:30"}
+{"email":"nu****@gmail.com","function":"PatientSignUp","level":"info","msg":"Attempting patient signup","time":"2024-11-01T09:16:57+05:30"}
+{"email":"nu****@gmail.com","function":"PatientSignUp","level":"info","msg":"Patient signup and verification email sent successfully","status":"success","time":"2024-11-01T09:17:00+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-01T09:17:57+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-11-01T09:17:57+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-01T09:18:18+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-01T09:18:18+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-01T13:44:01+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-01T13:44:01+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-01T13:44:27+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-11-01T13:44:28+05:30"}
+{"function":"GetProfile","id":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","level":"info","msg":"Fetching doctor profile","time":"2024-11-01T13:44:31+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-11-01T13:44:31+05:30"}
+{"error":"record not found","function":"GetProfile","level":"error","msg":"Failed to retrieve patient profile","patientId":"pt-5ec7471f-eaee-4ac3-99aa-c2832826d9fc","time":"2024-11-01T14:04:00+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-01T14:10:25+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-11-01T14:10:25+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-01T14:10:30+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-11-01T14:10:30+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-01T14:11:10+05:30"}
+{"email":"nu****@gmail.com","error":"record not found","function":"DoctorSignin","level":"error","msg":"Failed to sign in doctor","time":"2024-11-01T14:11:10+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-01T14:11:43+05:30"}
+{"doctorID":"dc-f58f3212-b129-4557-9f16-9589d7f21082","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-11-01T14:11:43+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-01T14:33:37+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-01T14:33:37+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-01T15:18:40+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-11-01T15:18:40+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-04T19:28:38+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-11-04T19:28:38+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-04T21:43:21+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-11-04T21:43:21+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-04T21:54:08+05:30"}
+{"error":"record not found","function":"PatientSignIn","id":"nu****@gmail.com","level":"error","msg":"Login failed for patient","time":"2024-11-04T21:54:08+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-06T11:28:43+05:30"}
+{"error":"record not found","function":"PatientSignIn","id":"nu****@gmail.com","level":"error","msg":"Login failed for patient","time":"2024-11-06T11:28:43+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-06T11:29:55+05:30"}
+{"error":"record not found","function":"PatientSignIn","id":"nu****@gmail.com","level":"error","msg":"Login failed for patient","time":"2024-11-06T11:29:55+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Attempting patient login","time":"2024-11-06T11:30:03+05:30"}
+{"function":"PatientSignIn","id":"nu****@gmail.com","level":"info","msg":"Patient login successful","status":"success","time":"2024-11-06T11:30:03+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-06T12:07:51+05:30"}
+{"email":"nu****@gmail.com","error":"record not found","function":"AdminSignIn","level":"error","msg":"Admin login failed","time":"2024-11-06T12:07:51+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-06T12:41:30+05:30"}
+{"email":"nu****@gmail.com","error":"record not found","function":"AdminSignIn","level":"error","msg":"Admin login failed","time":"2024-11-06T12:41:30+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-06T12:41:36+05:30"}
+{"email":"nu****@gmail.com","error":"record not found","function":"AdminSignIn","level":"error","msg":"Admin login failed","time":"2024-11-06T12:41:36+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-06T12:42:26+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-06T12:42:26+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-06T12:57:06+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-06T12:57:06+05:30"}
+{"function":"ListDoctors","level":"info","msg":"Fetching list of doctors","time":"2024-11-06T13:00:08+05:30"}
+{"count":2,"function":"ListDoctors","level":"info","msg":"List of doctors retrieved successfully","status":"success","time":"2024-11-06T13:00:08+05:30"}
+{"email":"nu****@gmail.com","function":"AddPatient","level":"info","msg":"Attempting to add a new patient","name":"nuhman","time":"2024-11-06T13:00:35+05:30"}
+{"email":"nu****@gmail.com","error":"ERROR: duplicate key value violates unique constraint \"uni_patients_email\" (SQLSTATE 23505)","function":"AddPatient","level":"error","msg":"Failed to add patient","time":"2024-11-06T13:00:35+05:30"}
+{"doctorId":"ds","function":"DeleteDoctor","level":"info","msg":"Attempting to delete doctor","time":"2024-11-06T13:01:16+05:30"}
+{"doctorId":"ds","error":"ERROR: column \"ds\" does not exist (SQLSTATE 42703)","function":"DeleteDoctor","level":"error","msg":"Failed to delete doctor","time":"2024-11-06T13:01:16+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Attempting to delete patient","patientId":"dss","time":"2024-11-06T13:01:36+05:30"}
+{"error":"ERROR: column \"dss\" does not exist (SQLSTATE 42703)","function":"DeletePatient","level":"error","msg":"Failed to delete patient","patientId":"dss","time":"2024-11-06T13:01:36+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Attempting to block patient","patientId":"dsf","reason":"nil","time":"2024-11-06T13:02:21+05:30"}
+{"error":"ERROR: column \"dsf\" does not exist (SQLSTATE 42703)","function":"BlockPatient","level":"error","msg":"Failed to block patient","patientId":"dsf","time":"2024-11-06T13:02:21+05:30"}
+{"function":"ListPatients","level":"info","msg":"Fetching list of patients","time":"2024-11-06T13:02:33+05:30"}
+{"count":3,"function":"ListPatients","level":"info","msg":"List of patients retrieved successfully","status":"success","time":"2024-11-06T13:02:33+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-06T13:02:47+05:30"}
+{"email":"nu****@gmail.com","error":"record not found","function":"DoctorSignin","level":"error","msg":"Failed to sign in doctor","time":"2024-11-06T13:02:47+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-06T13:02:56+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-11-06T13:02:56+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-06T13:03:05+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-11-06T13:03:05+05:30"}
+{"function":"GetProfile","id":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","level":"info","msg":"Fetching doctor profile","time":"2024-11-06T13:03:09+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-11-06T13:03:09+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"FetchAndStoreDoctorAvailability","level":"info","msg":"Fetching doctor availability","time":"2024-11-06T13:03:35+05:30"}
+{"error":"googleapi: Error 401: Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\nMore details:\nReason: authError, Message: Invalid Credentials\n","function":"FetchAndStoreDoctorAvailability","level":"error","msg":"Failed to fetch events from calendar","time":"2024-11-06T13:03:35+05:30"}

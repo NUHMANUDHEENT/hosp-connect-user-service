@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 
@@ -171,7 +172,7 @@ func (p *PatientServiceClient) AddPrescription(ctx context.Context, req *pb.AddP
 		Message: "Prescription added successfully",
 	}, nil
 }
-func (p PatientServiceClient) GetPrescription(ctx context.Context, req *pb.GetPrescriptionRequest) (*pb.GetPrescriptionResponse, error) {
+func (p *PatientServiceClient) GetPrescription(ctx context.Context, req *pb.GetPrescriptionRequest) (*pb.GetPrescriptionResponse, error) {
 	log.Printf("request for getting prescription from patient id: %s  , %s", req.PatientId, req.Query)
 	resp, err := p.service.GetPrescription(req.PatientId, req.Query)
 	if err != nil {
@@ -208,4 +209,15 @@ func (p PatientServiceClient) GetPrescription(ctx context.Context, req *pb.GetPr
 		Status:        "success",
 		StatusCode:    "200",
 	}, nil
+}
+func (p *PatientServiceClient) GetTotalPatient(ctx context.Context,req *pb.GetTotalPatientCountRequest)(*pb.GetTotalPatientCountResponse,error){
+	count , err := p.service.GetPatientCount()
+	if err != nil {
+		return &pb.GetTotalPatientCountResponse{},errors.New("failed to fetch count")
+	}
+
+	return &pb.GetTotalPatientCountResponse{
+		PatientCount: float64(count),
+		},nil
+
 }

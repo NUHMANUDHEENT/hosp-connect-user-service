@@ -17,11 +17,6 @@ type Doctor struct {
 	AvailabilityId   int
 	Role             string
 }
-type DoctorSpecialization struct {
-	gorm.Model
-	Name        string `gorm:"unique"`
-	Description string
-}
 
 type DoctorTokens struct {
 	gorm.Model
