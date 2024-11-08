@@ -157,3 +157,7 @@
 {"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-11-06T13:03:09+05:30"}
 {"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"FetchAndStoreDoctorAvailability","level":"info","msg":"Fetching doctor availability","time":"2024-11-06T13:03:35+05:30"}
 {"error":"googleapi: Error 401: Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\nMore details:\nReason: authError, Message: Invalid Credentials\n","function":"FetchAndStoreDoctorAvailability","level":"error","msg":"Failed to fetch events from calendar","time":"2024-11-06T13:03:35+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-08T00:11:42+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-08T00:11:42+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-08T00:12:05+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-08T00:12:05+05:30"}

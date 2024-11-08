@@ -6,9 +6,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/nuhmanudheent/hosp-connect-user-service/internal/config"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/domain"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/repository"
+	"github.com/nuhmanudheent/hosp-connect-user-service/internal/utils"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 	"google.golang.org/api/calendar/v3"
@@ -38,7 +38,7 @@ func NewDoctorService(repo repository.DoctorRepository, logger *logrus.Logger) D
 func (d *doctorService) DoctorSignin(email, password string) (string, error) {
 	d.logger.WithFields(logrus.Fields{
 		"function": "DoctorSignin",
-		"email":    config.MaskEmail(email),
+		"email":    utils.MaskEmail(email),
 	}).Info("Attempting doctor sign-in")
 
 	resp, err := d.repo.SignInValidate(email, password)
@@ -46,7 +46,7 @@ func (d *doctorService) DoctorSignin(email, password string) (string, error) {
 		d.logger.WithFields(logrus.Fields{
 			"function": "DoctorSignin",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(email),
+			"email":    utils.MaskEmail(email),
 		}).Error("Failed to sign in doctor")
 		return "", err
 	}
@@ -113,7 +113,7 @@ func (d *doctorService) UpdateProfile(doctor domain.Doctor) error {
 func (d *doctorService) StoreAccessToken(ctx context.Context, email string, token *oauth2.Token) error {
 	d.logger.WithFields(logrus.Fields{
 		"function": "StoreAccessToken",
-		"email":    config.MaskEmail(email),
+		"email":    utils.MaskEmail(email),
 	}).Info("Storing access token for doctor")
 
 	err := d.repo.StoreAccessToken(ctx, email, token)
@@ -121,14 +121,14 @@ func (d *doctorService) StoreAccessToken(ctx context.Context, email string, toke
 		d.logger.WithFields(logrus.Fields{
 			"function": "StoreAccessToken",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(email),
+			"email":    utils.MaskEmail(email),
 		}).Error("Failed to store access token")
 		return err
 	}
 
 	d.logger.WithFields(logrus.Fields{
 		"function": "StoreAccessToken",
-		"email":    config.MaskEmail(email),
+		"email":    utils.MaskEmail(email),
 		"status":   "success",
 	}).Info("Access token stored successfully")
 	return nil

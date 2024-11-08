@@ -2,9 +2,9 @@ package service
 
 import (
 	"github.com/go-redis/redis"
-	"github.com/nuhmanudheent/hosp-connect-user-service/internal/config"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/domain"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/repository"
+	"github.com/nuhmanudheent/hosp-connect-user-service/internal/utils"
 	"github.com/sirupsen/logrus"
 )
 
@@ -32,7 +32,7 @@ func NewPatientService(repo repository.PatientRepository, logger *logrus.Logger)
 func (p *patientService) SignIn(patient domain.Patient) (string, error) {
 	p.logger.WithFields(logrus.Fields{
 		"function": "PatientSignIn",
-		"id":       config.MaskEmail(patient.Email),
+		"id":       utils.MaskEmail(patient.Email),
 	}).Info("Attempting patient login")
 
 	resp, err := p.repo.SignIn(patient)
@@ -40,7 +40,7 @@ func (p *patientService) SignIn(patient domain.Patient) (string, error) {
 		p.logger.WithFields(logrus.Fields{
 			"function": "PatientSignIn",
 			"error":    err.Error(),
-			"id":       config.MaskEmail(patient.Email),
+			"id":       utils.MaskEmail(patient.Email),
 		}).Error("Login failed for patient")
 		return resp, err
 	}
@@ -48,14 +48,14 @@ func (p *patientService) SignIn(patient domain.Patient) (string, error) {
 	p.logger.WithFields(logrus.Fields{
 		"function": "PatientSignIn",
 		"status":   "success",
-		"id":       config.MaskEmail(patient.Email),
+		"id":       utils.MaskEmail(patient.Email),
 	}).Info("Patient login successful")
 	return resp, nil
 }
 func (p *patientService) SignUp(patient domain.Patient) (string, error) {
 	p.logger.WithFields(logrus.Fields{
 		"function": "PatientSignUp",
-		"email":    config.MaskEmail(patient.Email),
+		"email":    utils.MaskEmail(patient.Email),
 	}).Info("Attempting patient signup")
 
 	resp, err := p.repo.SignUp(patient)
@@ -63,18 +63,18 @@ func (p *patientService) SignUp(patient domain.Patient) (string, error) {
 		p.logger.WithFields(logrus.Fields{
 			"function": "PatientSignUp",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(patient.Email),
+			"email":    utils.MaskEmail(patient.Email),
 		}).Error("Signup failed for patient")
 		return resp, err
 	}
 
 	// Verification email sent
-	resp, err = config.SignUpverify(patient.Email)
+	resp, err = utils.SignUpverify(patient.Email)
 	if err != nil {
 		p.logger.WithFields(logrus.Fields{
 			"function": "PatientSignUp",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(patient.Email),
+			"email":    utils.MaskEmail(patient.Email),
 		}).Error("Verification email failed to send")
 		return "Failed to send verification email", err
 	}
@@ -82,7 +82,7 @@ func (p *patientService) SignUp(patient domain.Patient) (string, error) {
 	p.logger.WithFields(logrus.Fields{
 		"function": "PatientSignUp",
 		"status":   "success",
-		"email":    config.MaskEmail(patient.Email),
+		"email":    utils.MaskEmail(patient.Email),
 	}).Info("Patient signup and verification email sent successfully")
 	return resp, nil
 }
@@ -93,7 +93,7 @@ func (p *patientService) UpdateProfile(patient domain.Patient) error {
 		p.logger.WithFields(logrus.Fields{
 			"function": "UpdateProfile",
 			"error":    err.Error(),
-			"id":       patient.ID, 
+			"id":       patient.ID,
 		}).Error("Failed to update patient profile")
 	}
 	return err
@@ -123,7 +123,7 @@ func (p *patientService) GetPatientCount() (int, error) {
 	return count, err
 }
 func (p *patientService) SignUpVerify(token string) (string, error) {
-	email, err := config.Rdb.Get(token).Result()
+	email, err := utils.Rdb.Get(token).Result()
 	if err == redis.Nil {
 		return "Token expired or invalid", err
 	} else if err != nil {

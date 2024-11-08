@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/nuhmanudheent/hosp-connect-user-service/internal/config"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/domain"
 	"github.com/nuhmanudheent/hosp-connect-user-service/internal/repository"
+	"github.com/nuhmanudheent/hosp-connect-user-service/internal/utils"
 	"github.com/sirupsen/logrus"
 )
 
@@ -39,7 +39,7 @@ func (a *adminService) SignIn(admin domain.Admin) (string, error) {
 	// Log SignIn attempt
 	a.logger.WithFields(logrus.Fields{
 		"function": "AdminSignIn",
-		"email":    config.MaskEmail(admin.Email),
+		"email":    utils.MaskEmail(admin.Email),
 	}).Info("Attempting admin login")
 
 	resp, err := a.repo.SignIn(admin)
@@ -47,7 +47,7 @@ func (a *adminService) SignIn(admin domain.Admin) (string, error) {
 		a.logger.WithFields(logrus.Fields{
 			"function": "AdminSignIn",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(admin.Email),
+			"email":    utils.MaskEmail(admin.Email),
 		}).Error("Admin login failed")
 		return resp, err
 	}
@@ -55,7 +55,7 @@ func (a *adminService) SignIn(admin domain.Admin) (string, error) {
 	a.logger.WithFields(logrus.Fields{
 		"function": "AdminSignIn",
 		"status":   "success",
-		"email":    config.MaskEmail(admin.Email),
+		"email":    utils.MaskEmail(admin.Email),
 	}).Info("Admin login successful")
 	return resp, nil
 }
@@ -63,7 +63,7 @@ func (a *adminService) SignIn(admin domain.Admin) (string, error) {
 func (a *adminService) SignUp(email, name, password string) (string, error) {
 	a.logger.WithFields(logrus.Fields{
 		"function": "AdminSignUp",
-		"email":    config.MaskEmail(email),
+		"email":    utils.MaskEmail(email),
 	}).Info("Attempting to create a new admin account")
 
 	resp, err := a.repo.SignUp(domain.Admin{Email: email, Name: name, Password: password})
@@ -71,7 +71,7 @@ func (a *adminService) SignUp(email, name, password string) (string, error) {
 		a.logger.WithFields(logrus.Fields{
 			"function": "AdminSignUp",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(email),
+			"email":    utils.MaskEmail(email),
 		}).Error("Failed to create admin account")
 		return resp, err
 	}
@@ -79,7 +79,7 @@ func (a *adminService) SignUp(email, name, password string) (string, error) {
 	a.logger.WithFields(logrus.Fields{
 		"function": "AdminSignUp",
 		"status":   "success",
-		"email":    config.MaskEmail(email),
+		"email":    utils.MaskEmail(email),
 	}).Info("Admin account created successfully")
 	return resp, nil
 }
@@ -87,7 +87,7 @@ func (a *adminService) SignUp(email, name, password string) (string, error) {
 func (a *adminService) AddDoctor(email, name, password string, phone, specializationId int32) (string, error) {
 	a.logger.WithFields(logrus.Fields{
 		"function":         "AddDoctor",
-		"email":            config.MaskEmail(email),
+		"email":            utils.MaskEmail(email),
 		"phone":            phone,
 		"specializationId": specializationId,
 	}).Info("Attempting to add a new doctor")
@@ -103,7 +103,7 @@ func (a *adminService) AddDoctor(email, name, password string, phone, specializa
 		a.logger.WithFields(logrus.Fields{
 			"function": "AddDoctor",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(email),
+			"email":    utils.MaskEmail(email),
 		}).Error("Failed to add doctor")
 		return resp, err
 	}
@@ -111,7 +111,7 @@ func (a *adminService) AddDoctor(email, name, password string, phone, specializa
 	a.logger.WithFields(logrus.Fields{
 		"function": "AddDoctor",
 		"status":   "success",
-		"email":    config.MaskEmail(email),
+		"email":    utils.MaskEmail(email),
 	}).Info("Doctor added successfully")
 	return resp, nil
 }
@@ -143,7 +143,7 @@ func (a *adminService) DeleteDoctor(doctorId string) (string, error) {
 func (a *adminService) AddPatient(patient domain.Patient) (string, error) {
 	a.logger.WithFields(logrus.Fields{
 		"function": "AddPatient",
-		"email":    config.MaskEmail(patient.Email),
+		"email":    utils.MaskEmail(patient.Email),
 		"name":     patient.Name,
 	}).Info("Attempting to add a new patient")
 
@@ -152,7 +152,7 @@ func (a *adminService) AddPatient(patient domain.Patient) (string, error) {
 		a.logger.WithFields(logrus.Fields{
 			"function": "AddPatient",
 			"error":    err.Error(),
-			"email":    config.MaskEmail(patient.Email),
+			"email":    utils.MaskEmail(patient.Email),
 		}).Error("Failed to add patient")
 		return resp, err
 	}
@@ -160,7 +160,7 @@ func (a *adminService) AddPatient(patient domain.Patient) (string, error) {
 	a.logger.WithFields(logrus.Fields{
 		"function": "AddPatient",
 		"status":   "success",
-		"email":    config.MaskEmail(patient.Email),
+		"email":    utils.MaskEmail(patient.Email),
 	}).Info("Patient added successfully")
 	return resp, nil
 }
