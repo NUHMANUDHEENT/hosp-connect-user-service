@@ -161,3 +161,61 @@
 {"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-08T00:11:42+05:30"}
 {"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-08T00:12:05+05:30"}
 {"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-08T00:12:05+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-08T16:14:03+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-08T16:14:03+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-08T16:14:08+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-08T16:14:08+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-08T16:17:05+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-08T16:17:05+05:30"}
+{"email":"ex****@example.com","function":"AddDoctor","level":"info","msg":"Attempting to add a new doctor","phone":1234567890,"specializationId":1,"time":"2024-11-08T16:17:44+05:30"}
+{"email":"ex****@example.com","function":"AddDoctor","level":"info","msg":"Doctor added successfully","status":"success","time":"2024-11-08T16:17:44+05:30"}
+{"function":"ListDoctors","level":"info","msg":"Fetching list of doctors","time":"2024-11-08T16:18:21+05:30"}
+{"count":3,"function":"ListDoctors","level":"info","msg":"List of doctors retrieved successfully","status":"success","time":"2024-11-08T16:18:21+05:30"}
+{"doctorId":"dc-16209d19-be9b-4bb9-894d-31d15a9466fc","function":"DeleteDoctor","level":"info","msg":"Attempting to delete doctor","time":"2024-11-08T16:18:43+05:30"}
+{"doctorId":"dc-16209d19-be9b-4bb9-894d-31d15a9466fc","error":"ERROR: trailing junk after numeric literal at or near \"16209d\" (SQLSTATE 42601)","function":"DeleteDoctor","level":"error","msg":"Failed to delete doctor","time":"2024-11-08T16:18:43+05:30"}
+{"doctorId":"dc-16209d19-be9b-4bb9-894d-31d15a9466fc","function":"DeleteDoctor","level":"info","msg":"Attempting to delete doctor","time":"2024-11-08T16:18:56+05:30"}
+{"doctorId":"dc-16209d19-be9b-4bb9-894d-31d15a9466fc","error":"ERROR: trailing junk after numeric literal at or near \"16209d\" (SQLSTATE 42601)","function":"DeleteDoctor","level":"error","msg":"Failed to delete doctor","time":"2024-11-08T16:18:56+05:30"}
+{"doctorId":"dc-16209d19-be9b-4bb9-894d-31d15a9466fc","function":"DeleteDoctor","level":"info","msg":"Attempting to delete doctor","time":"2024-11-08T16:19:59+05:30"}
+{"doctorId":"dc-16209d19-be9b-4bb9-894d-31d15a9466fc","function":"DeleteDoctor","level":"info","msg":"Doctor deleted successfully","status":"success","time":"2024-11-08T16:19:59+05:30"}
+{"function":"ListDoctors","level":"info","msg":"Fetching list of doctors","time":"2024-11-08T16:20:59+05:30"}
+{"count":2,"function":"ListDoctors","level":"info","msg":"List of doctors retrieved successfully","status":"success","time":"2024-11-08T16:20:59+05:30"}
+{"email":"ab****@gmail.com","function":"AddPatient","level":"info","msg":"Attempting to add a new patient","name":"abdin","time":"2024-11-08T16:22:25+05:30"}
+{"email":"ab****@gmail.com","function":"AddPatient","level":"info","msg":"Patient added successfully","status":"success","time":"2024-11-08T16:22:25+05:30"}
+{"function":"ListPatients","level":"info","msg":"Fetching list of patients","time":"2024-11-08T16:22:42+05:30"}
+{"count":4,"function":"ListPatients","level":"info","msg":"List of patients retrieved successfully","status":"success","time":"2024-11-08T16:22:42+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Attempting to delete patient","patientId":"pt-76f88d9e-1079-49a2-8470-7b00b80d83e8","time":"2024-11-08T16:23:05+05:30"}
+{"error":"ERROR: trailing junk after numeric literal at or near \"76f\" (SQLSTATE 42601)","function":"DeletePatient","level":"error","msg":"Failed to delete patient","patientId":"pt-76f88d9e-1079-49a2-8470-7b00b80d83e8","time":"2024-11-08T16:23:05+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Attempting to delete patient","patientId":"pt-76f88d9e-1079-49a2-8470-7b00b80d83e8","time":"2024-11-08T16:23:52+05:30"}
+{"function":"DeletePatient","level":"info","msg":"Patient deleted successfully","patientId":"pt-76f88d9e-1079-49a2-8470-7b00b80d83e8","status":"success","time":"2024-11-08T16:23:52+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Attempting to block patient","patientId":"pt-76f88d9e-1079-49a2-8470-7b00b80d83e8","reason":"nil","time":"2024-11-08T16:24:06+05:30"}
+{"error":"record not found","function":"BlockPatient","level":"error","msg":"Failed to block patient","patientId":"pt-76f88d9e-1079-49a2-8470-7b00b80d83e8","time":"2024-11-08T16:24:06+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Attempting to block patient","patientId":"pt-d5ae0690-389b-46fc-89a4-3dc8eda144e8","reason":"nil","time":"2024-11-08T16:24:30+05:30"}
+{"function":"BlockPatient","level":"info","msg":"Patient blocked successfully","patientId":"pt-d5ae0690-389b-46fc-89a4-3dc8eda144e8","status":"success","time":"2024-11-08T16:24:30+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-08T16:25:22+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-11-08T16:25:22+05:30"}
+{"error":"record not found","function":"GetProfile","level":"error","msg":"Failed to retrieve patient profile","patientId":"pt-5ec7471f-eaee-4ac3-99aa-c2832826d9fc","time":"2024-11-08T17:12:00+05:30"}
+{"email":"nu****@gmail.com","function":"DoctorSignin","level":"info","msg":"Attempting doctor sign-in","time":"2024-11-08T17:41:46+05:30"}
+{"doctorID":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","function":"DoctorSignin","level":"info","msg":"Doctor signed in successfully","status":"success","time":"2024-11-08T17:41:47+05:30"}
+{"function":"GetProfile","id":"dc-c06e436c-2872-4b17-a353-0cf70f849f6c","level":"info","msg":"Fetching doctor profile","time":"2024-11-08T17:41:51+05:30"}
+{"doctorID":2,"function":"GetProfile","level":"info","msg":"Fetched doctor profile successfully","status":"success","time":"2024-11-08T17:41:51+05:30"}
+{"error":"record not found","function":"GetProfile","level":"error","msg":"Failed to retrieve patient profile","patientId":"pt-5ec7471f-eaee-4ac3-99aa-c2832826d9fc","time":"2024-11-09T17:18:00+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-10T09:48:08+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-10T09:48:08+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-10T09:54:12+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-10T09:54:12+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-10T09:59:51+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-10T09:59:51+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-10T10:00:10+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-10T10:00:10+05:30"}
+{"email":"ex****@example.com","function":"AddDoctor","level":"info","msg":"Attempting to add a new doctor","phone":1234567890,"specializationId":0,"time":"2024-11-10T10:02:46+05:30"}
+{"email":"ex****@example.com","error":"ERROR: duplicate key value violates unique constraint \"uni_doctors_email\" (SQLSTATE 23505)","function":"AddDoctor","level":"error","msg":"Failed to add doctor","time":"2024-11-10T10:02:47+05:30"}
+{"email":"12****@example.com","function":"AddDoctor","level":"info","msg":"Attempting to add a new doctor","phone":1234567890,"specializationId":0,"time":"2024-11-10T10:02:53+05:30"}
+{"email":"12****@example.com","function":"AddDoctor","level":"info","msg":"Doctor added successfully","status":"success","time":"2024-11-10T10:02:53+05:30"}
+{"email":"12****@example.com","function":"AddDoctor","level":"info","msg":"Attempting to add a new doctor","phone":1234567890,"specializationId":0,"time":"2024-11-10T10:03:22+05:30"}
+{"email":"12****@example.com","error":"ERROR: duplicate key value violates unique constraint \"uni_doctors_email\" (SQLSTATE 23505)","function":"AddDoctor","level":"error","msg":"Failed to add doctor","time":"2024-11-10T10:03:23+05:30"}
+{"email":"12****@example.com","function":"AddDoctor","level":"info","msg":"Attempting to add a new doctor","phone":1234567890,"specializationId":0,"time":"2024-11-10T10:05:02+05:30"}
+{"email":"12****@example.com","error":"ERROR: duplicate key value violates unique constraint \"uni_doctors_email\" (SQLSTATE 23505)","function":"AddDoctor","level":"error","msg":"Failed to add doctor","time":"2024-11-10T10:05:03+05:30"}
+{"email":"12****@example.com","function":"AddDoctor","level":"info","msg":"Attempting to add a new doctor","phone":0,"specializationId":0,"time":"2024-11-10T10:05:18+05:30"}
+{"email":"12****@example.com","error":"ERROR: duplicate key value violates unique constraint \"uni_doctors_email\" (SQLSTATE 23505)","function":"AddDoctor","level":"error","msg":"Failed to add doctor","time":"2024-11-10T10:05:19+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-10T14:57:10+05:30"}
+{"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-10T14:57:10+05:30"}

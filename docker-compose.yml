@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Nuhman@456
+      - POSTGRES_DB=user_db
+    ports:
+      - "5432:5432" 
+
+  hosp-connect-user-svc:
+    image: hosp-connect-user-svc  
+    container_name: hosp-connect-user-svc
+    ports:
+      - "50051:50051"
+      - "2112:2112"  
+    environment:
+      - DATABASE_URL=postgres://postgres:Nuhman%40456@postgres:5432/user_db?sslmode=disable
+    depends_on:
+      - postgres
+
+  prometheus:
+    image: prom/prometheus 
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - hosp-connect-user-svc 
+
+  api-gateway:
+    image: api-gateway  # Replace with your API Gateway Docker image name
+    container_name: api-gateway
+    ports:
+      - "8080:8080"  # Expose the API Gateway port (adjust based on your app)
+    depends_on:
+      - hosp-connect-user-svc  # Ensure it waits for the user_service
+    environment:
+      - GRPC_SERVER=user-service:50051  # Use the service name for internal communication

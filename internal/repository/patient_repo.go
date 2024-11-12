@@ -87,7 +87,7 @@ func (p *patientRepository) SignUpVerify(email string) (string, error) {
 
 func (p *patientRepository) DeletePatient(patientID string) (string, error) {
 	var patient domain.Patient
-	if err := p.db.First(&patient, patientID).Error; err != nil {
+	if err := p.db.First(&patient, "patient_id", patientID).Error; err != nil {
 		return "Patient not found", err
 	}
 	if err := p.db.Delete(&patient).Error; err != nil {
@@ -99,7 +99,7 @@ func (p *patientRepository) DeletePatient(patientID string) (string, error) {
 // Block logic for patient
 func (p *patientRepository) Block(patientID string, reason string) (string, error) {
 	var patient domain.Patient
-	if err := p.db.First(&patient, patientID).Error; err != nil {
+	if err := p.db.First(&patient, "patient_id", patientID).Error; err != nil {
 		return "Patient not found", err
 	}
 	if patient.IsBlock {

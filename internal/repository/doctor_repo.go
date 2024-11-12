@@ -71,7 +71,7 @@ func (d *doctorRepository) SignUpStore(doctordetails domain.Doctor) (string, err
 }
 func (p *doctorRepository) DeleteDoctor(doctorId string) (string, error) {
 	var doctor domain.Doctor
-	if err := p.db.First(&doctor, doctorId).Error; err != nil {
+	if err := p.db.First(&doctor,"doctor_id", doctorId).Error; err != nil {
 		return "Doctor not found", err
 	}
 	if err := p.db.Delete(&doctor).Error; err != nil {
