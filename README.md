@@ -39,5 +39,5 @@ The **User Service** is a core part of the HospConnect system, responsible for m
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-username/user-service.git
+git clone https://github.com/NUHMANUDHEENT/hosp-connect-user-service.git
 cd user-service
