@@ -10,7 +10,6 @@ COPY . .
 
 RUN go build -o user_service ./cmd
 
-
 FROM alpine:3.18
 
 RUN apk --no-cache add ca-certificates
@@ -18,9 +17,5 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /app
 
 COPY --from=builder /app/user_service .
-
-COPY .env .
-
-EXPOSE 8081
 
 CMD ["./user_service"]
