@@ -18,4 +18,6 @@ WORKDIR /app
 
 COPY --from=builder /app/user_service .
 
+COPY .env ./
+
 CMD ["./user_service"]
