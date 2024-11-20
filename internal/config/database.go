@@ -16,7 +16,7 @@ func InitDatabase() *gorm.DB {
 		log.Fatal("DATABASE_URL environment variable not set")
 	}
 
-	db, err := gorm.Open(postgres.Open("postgres://postgres:Nuhman%40456@postgres-db-service:5432/user_svc"), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("failed to connect with postgres......",err)
 	}
