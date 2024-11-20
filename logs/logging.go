@@ -7,16 +7,15 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
-// Setup logrus and lumbejack for logging 
+
 func NewLogger() *logrus.Logger {
 	logger := logrus.New()
 
-	// Set up Lumberjack logger
 	lumberjackLogger := &lumberjack.Logger{
 		Filename:   "logs/user_service.log",
-		MaxSize:    10, // MB
+		MaxSize:    10, 
 		MaxBackups: 5,
-		MaxAge:     30, // days
+		MaxAge:     30, 
 		Compress:   true,
 	}
 
