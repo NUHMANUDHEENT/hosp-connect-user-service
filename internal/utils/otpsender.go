@@ -37,7 +37,7 @@ func SignUpverify(email string) (string, error) {
 		return "Failed to store token in Redis", err
 	}
 
-	verificationURL := fmt.Sprintf("http://%s/api/v1/patient/signup/verify-email?token=%s", os.Getenv("IP_ADDRESS"), token)
+	verificationURL := fmt.Sprintf("%s/api/v1/patient/signup/verify-email?token=%s", os.Getenv("IP_ADDRESS"), token)
 	err = SendVerificationEmail(email, verificationURL)
 	if err != nil {
 		return "Failed to send verification email", err

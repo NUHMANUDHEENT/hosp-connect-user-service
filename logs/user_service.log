@@ -219,3 +219,9 @@
 {"email":"12****@example.com","error":"ERROR: duplicate key value violates unique constraint \"uni_doctors_email\" (SQLSTATE 23505)","function":"AddDoctor","level":"error","msg":"Failed to add doctor","time":"2024-11-10T10:05:19+05:30"}
 {"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Attempting admin login","time":"2024-11-10T14:57:10+05:30"}
 {"email":"nu****@gmail.com","function":"AdminSignIn","level":"info","msg":"Admin login successful","status":"success","time":"2024-11-10T14:57:10+05:30"}
+{"email":"nu****@gmail.com","function":"PatientSignUp","level":"info","msg":"Attempting patient signup","time":"2024-11-22T01:35:54+05:30"}
+{"email":"nu****@gmail.com","error":"gomail: could not send email 1: 530 5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/mail/?p=WantAuthError d9443c01a7336-2129db8d564sm2314065ad.8 - gsmtp","function":"PatientSignUp","level":"error","msg":"Verification email failed to send","time":"2024-11-22T01:35:59+05:30"}
+{"email":"nu****@gmail.com","function":"PatientSignUp","level":"info","msg":"Attempting patient signup","time":"2024-11-22T01:37:38+05:30"}
+{"email":"nu****@gmail.com","error":"email already in use","function":"PatientSignUp","level":"error","msg":"Signup failed for patient","time":"2024-11-22T01:37:38+05:30"}
+{"email":"nu****@gmail.com","function":"PatientSignUp","level":"info","msg":"Attempting patient signup","time":"2024-11-22T01:37:42+05:30"}
+{"email":"nu****@gmail.com","error":"gomail: could not send email 1: 530 5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/mail/?p=WantAuthError d2e1a72fcca58-724de579e83sm157228b3a.186 - gsmtp","function":"PatientSignUp","level":"error","msg":"Verification email failed to send","time":"2024-11-22T01:37:47+05:30"}
