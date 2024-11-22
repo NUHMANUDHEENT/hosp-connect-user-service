@@ -266,7 +266,7 @@ func (d *doctorService) FetchAndStoreDoctorAvailability(ctx context.Context, doc
 	}
 
 	// Store the availability in the database
-	if err := d.repo.StoreDoctorSchedules(availability); err != nil {
+	if err := d.repo.StoreDoctorSchedules(availability,doctorID); err != nil {
 		d.logger.WithFields(logrus.Fields{
 			"function": "FetchAndStoreDoctorAvailability",
 			"error":    err.Error(),

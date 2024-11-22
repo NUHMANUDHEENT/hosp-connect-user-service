@@ -22,7 +22,7 @@ type DoctorRepository interface {
 	ListDoctors() ([]domain.Doctor, error)
 	StoreAccessToken(ctx context.Context, email string, token *oauth2.Token) error
 	GetAccessToken(ctx context.Context, doctorID string) (*oauth2.Token, error)
-	StoreDoctorSchedules(schedules []domain.AvailabilitySlot) error
+	StoreDoctorSchedules(schedules []domain.AvailabilitySlot,doctorid string) error
 	GetAvailabilityByCategory(categoryId int32, reqDateTime time.Time) ([]domain.AvailabilitySlot, error)
 	GetAvailabilityByDoctorId(doctorId string) ([]domain.AvailableDates, error)
 	GetDoctorCount() (int, error)
@@ -144,9 +144,9 @@ func (r *doctorRepository) GetAccessToken(ctx context.Context, doctorID string) 
 
 	return token, nil
 }
-func (r *doctorRepository) StoreDoctorSchedules(schedules []domain.AvailabilitySlot) error {
+func (r *doctorRepository) StoreDoctorSchedules(schedules []domain.AvailabilitySlot,doctorid string) error {
 	doctors := domain.Doctor{}
-	if err := r.db.Where("doctor_id = ?", schedules[0].DoctorID).First(&doctors).Error; err != nil {
+	if err := r.db.Where("doctor_id = ?", doctorid).First(&doctors).Error; err != nil {
 		return err
 	}
 	for i, _ := range schedules {
@@ -160,6 +160,7 @@ func (r *doctorRepository) StoreDoctorSchedules(schedules []domain.AvailabilityS
 
 	return nil
 }
+
 
 // doctorRepository.go
 func (r *doctorRepository) GetAvailabilityByCategory(categoryId int32, reqDateTime time.Time) ([]domain.AvailabilitySlot, error) {
